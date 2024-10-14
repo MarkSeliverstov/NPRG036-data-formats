@@ -1,0 +1,134 @@
+# SIS (Student Information System) Domain Model
+
+The Student Information System (SIS) is a software system that manages
+information about students, courses, instructors, and other related entities
+within a university. The following is a structured description of each class
+and its attributes, as well as the relationships between them.
+
+## Specification
+
+In this section, we will describe the classes and their attributes in detail,
+as well as the associations between them.
+
+### Person
+
+The `Person` class represents an individual within the university system. It
+serves as the base class for both students and instructors.
+
+- id
+  - type: int
+  - description: An integer that uniquely identifies a person.
+  - example: 123
+
+- name
+  - type: String
+  - description: The full name of the person.
+  - example: "John Doe"
+
+- email
+  - type: String
+  - description: The email address of the person.
+  - example: "john.doe@some.mail.cz"
+
+### Student
+
+The `Student` class represents a student enrolled in the university system.
+
+- association: enrolls
+  - type: Enrollment
+  - description: Represents the relationship between a student and a course.
+
+- association: enrolled in
+  - type: Program
+  - description: Which program the student is enrolled in.
+
+### Teacher
+
+The `Teacher` class represents an person who teaches courses within the
+university system.
+
+- association: teaches
+  - type: Course
+  - description: Which courses the teacher teaches.
+
+- association: belongs to
+  - type: Department
+  - description: Which department the teacher belongs to.
+
+### Course
+
+The Course class represents a course offered by the university.
+
+- code
+  - type: String
+  - description: A unique string identifier for the course.
+  - example: "CS101"
+
+- title
+  - type: String
+  - description: The title of the course.
+  - example: "Data Formats"
+
+- credits
+  - type: int
+  - description: The number of credits the student receives for completing the course.
+  - example: 3
+
+- association: course
+  - type: Enrollment
+  - description: Courses that students are enrolled in.
+
+- association: offers
+  - type: Department
+  - description: The department that offers the course.
+
+### Enrollment
+
+The `Enrollment` class represents the relationship between a student and a
+course.
+
+- grade
+  - type: int
+  - description: The grade received by the student for the course (1-4).
+  - example: 1
+
+- enrolledOn
+  - type: Date
+  - description: The date when the student enrolled in the course.
+  - example: 2021-09-01
+
+- completedOn
+  - type: Date [0..1]
+  - description: The date when the student completed the course. This attribute
+    is optional, meaning that the student may not have completed the course
+    yet.
+  - example: 2021-12-15
+
+### Department
+
+The `Department` class represents a department within the university.
+
+- name
+  - type: String
+  - description: The name of the department.
+  - example: "Computer Science"
+
+- location
+  - type: String
+  - description: The physical location of the department within the university.
+  - example: "Building A, Room 101"
+
+### Program
+
+The `Program` class represents an academic program offered by the university
+for students to enroll in.
+
+- name
+  - type: String
+  - description: The name of the program.
+  - example: "Computer Science"
+
+- duration
+  - type: int
+  - description: The typical duration of the program in years.
+  - example: 4
