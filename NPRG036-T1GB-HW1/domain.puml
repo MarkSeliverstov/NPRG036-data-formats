@@ -1,0 +1,47 @@
+@startuml
+
+class Person {
+  id: int
+  name: String
+  email: String
+}
+
+class Student { }
+
+class Teacher { }
+
+class Course {
+  code: String
+  title: String
+  credits: int
+}
+
+class Enrollment {
+  grade: int
+  enrolledOn: Date
+  completedOn: Date [0..1]
+}
+
+class Department {
+  name: String
+  location: String
+}
+
+class Program {
+  name: String
+  duration: int
+}
+
+Person <|-- Student
+Person <|-- Teacher
+
+Student "1" -- "0..*" Enrollment : enrolls
+Enrollment "0..*" -- "1" Course : course
+
+Teacher "0..*" -- "0..*" Course : teaches
+Teacher "0..*" -- "1" Department : belongs to
+
+Course "0..*" -- "1" Department : offers
+Student "0..*" -- "1" Program : enrolled in
+
+@enduml
