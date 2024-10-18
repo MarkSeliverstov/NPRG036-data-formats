@@ -36,13 +36,13 @@ class Program {
 Person <|-- Student
 Person <|-- Teacher
 
-Student "1..1" -- "0..*" Enrollment : enrolls
-Enrollment "0..*" -- "1..1" Course : course
+Student "1" -- "0..*" Enrollment : enrolls
+Enrollment "0..*" -- "1" Course : course
 
 Teacher "0..*" -- "0..*" Course : teaches
-Teacher "0..*" -- "1..1" Department : belongs to
+Teacher "0..*" -- "1" Department : belongs to
 
-Course "0..*" -- "1..1" Department : offers
+Course "0..*" -- "1" Department : offers
 Student "0..*" -- "0..1" Program : enrolled in
 
 @enduml
