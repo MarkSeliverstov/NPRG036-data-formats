@@ -40,7 +40,7 @@ The `Student` class represents a student enrolled in the university system.
 
 - association: enrolled in
   - type: Program
-  - description: Which program the student is enrolled in.
+  - description: Which program may the student be enrolled in.
 
 ### Teacher
 
