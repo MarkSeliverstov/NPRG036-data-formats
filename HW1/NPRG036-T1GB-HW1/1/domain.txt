@@ -30,6 +30,11 @@ serves as the base class for both students and instructors.
   - description: The email address of the person.
   - example: "john.doe@some.mail.cz"
 
+- phones
+  - type: String[0..*]
+  - description: The phone numbers of the person.
+  - example: ["+420 123 456 789", "+420 987 654 321"]
+
 ### Student
 
 The `Student` class represents a student enrolled in the university system.

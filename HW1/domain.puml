@@ -4,6 +4,7 @@ class Person {
   id: Int
   name: String
   email: String
+  phones: String [0..*]
 }
 
 class Student { }
