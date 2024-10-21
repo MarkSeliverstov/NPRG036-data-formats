@@ -1,9 +1,10 @@
 @startuml
 
 class Person {
-  id: int
+  id: Int
   name: String
   email: String
+  phones: String [0..*]
 }
 
 class Student { }
@@ -13,11 +14,11 @@ class Teacher { }
 class Course {
   code: String
   title: String
-  credits: int
+  credits: Int
 }
 
 class Enrollment {
-  grade: int
+  grade: Int
   enrolledOn: Date
   completedOn: Date [0..1]
 }
@@ -29,7 +30,7 @@ class Department {
 
 class Program {
   name: String
-  duration: int
+  duration: Int
 }
 
 Person <|-- Student
@@ -42,6 +43,6 @@ Teacher "0..*" -- "0..*" Course : teaches
 Teacher "0..*" -- "1" Department : belongs to
 
 Course "0..*" -- "1" Department : offers
-Student "0..*" -- "1" Program : enrolled in
+Student "0..*" -- "0..1" Program : enrolled in
 
 @enduml
