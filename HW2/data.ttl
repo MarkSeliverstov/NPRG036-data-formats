@@ -1,0 +1,160 @@
+@prefix ex: <http://example.org/vocabulary/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Definition of Classes
+ex:Person a rdfs:Class ;
+    rdfs:label "Person" .
+
+ex:Student a rdfs:Class ;
+    rdfs:label "Student" ;
+    rdfs:subClassOf ex:Person .
+
+ex:Teacher a rdfs:Class ;
+    rdfs:label "Teacher" ;
+    rdfs:subClassOf ex:Person .
+
+ex:Course a rdfs:Class ;
+    rdfs:label "Course" .
+
+ex:Enrollment a rdfs:Class ;
+    rdfs:label "Enrollment" .
+
+ex:Department a rdfs:Class ;
+    rdfs:label "Department" .
+
+ex:Program a rdfs:Class ;
+    rdfs:label "Program" .
+
+# Definition of Properties
+ex:enrolls a rdf:Property ;
+    rdfs:domain ex:Student ;
+    rdfs:range ex:Course ;
+    rdfs:label "enrolls in course" .
+
+ex:course a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range ex:Course ;
+    rdfs:label "Course of enrollment" .
+
+ex:teaches a rdf:Property ;
+    rdfs:domain ex:Teacher ;
+    rdfs:range ex:Course ;
+    rdfs:label "teaches" .
+
+ex:belongsTo a rdf:Property ;
+    rdfs:domain ex:Teacher ;
+    rdfs:range ex:Department ;
+    rdfs:label "belongs to department" .
+
+ex:offers a rdf:Property ;
+    rdfs:domain ex:Department ;
+    rdfs:range ex:Course ;
+    rdfs:label "offers course" .
+
+ex:enrolledIn a rdf:Property ;
+    rdfs:domain ex:Student ;
+    rdfs:range ex:Program ;
+    rdfs:label "enrolled in program" .
+
+ex:code a rdf:Property ;
+    rdfs:domain ex:Course ;
+    rdfs:range xsd:string ;
+    rdfs:label "Course code" .
+
+ex:title a rdf:Property ;
+    rdfs:domain ex:Course ;
+    rdfs:range xsd:string ;
+    rdfs:label "Course title" .
+
+ex:credits a rdf:Property ;
+    rdfs:domain ex:Course ;
+    rdfs:range xsd:int ;
+    rdfs:label "Course credits" .
+
+ex:name a rdf:Property ;
+    rdfs:domain ex:Department ;
+    rdfs:range xsd:string ;
+    rdfs:label "Department name" .
+
+ex:location a rdf:Property ;
+    rdfs:domain ex:Department ;
+    rdfs:range xsd:string ;
+    rdfs:label "Department location" .
+
+ex:duration a rdf:Property ;
+    rdfs:domain ex:Program ;
+    rdfs:range xsd:int ;
+    rdfs:label "Program duration" .
+
+# Sample Data
+# Instances of Students
+ex:student1 a ex:Student ;
+    foaf:name "Alice"@en ;
+    ex:enrolls ex:course1 .
+
+ex:student2 a ex:Student ;
+    foaf:name "Bob"@en ;
+    ex:enrolls ex:course2 .
+
+ex:student3 a ex:Student ;
+    foaf:name "Charlie"@en ;
+    ex:enrolls ex:course1 .
+
+# Instances of Teachers
+ex:teacher1 a ex:Teacher ;
+    foaf:name "Dr. Smith"@en ;
+    ex:teaches ex:course1 ;
+    ex:belongsTo ex:dept1 .
+
+ex:teacher2 a ex:Teacher ;
+    foaf:name "Dr. Brown"@en ;
+    ex:teaches ex:course2 ;
+    ex:belongsTo ex:dept1 .
+
+ex:teacher3 a ex:Teacher ;
+    foaf:name "Prof. Miller"@en ;
+    ex:teaches ex:course3 ;
+    ex:belongsTo ex:dept2 .
+
+# Instances of Courses
+ex:course1 a ex:Course ;
+    ex:code "CS101" ;
+    ex:title "Introduction to Computer Science"@en ;
+    ex:credits "4"^^xsd:int .
+
+ex:course2 a ex:Course ;
+    ex:code "CS102" ;
+    ex:title "Data Structures"@en ;
+    ex:credits "3"^^xsd:int .
+
+ex:course3 a ex:Course ;
+    ex:code "CS103" ;
+    ex:title "Algorithms"@en ;
+    ex:credits "4"^^xsd:int .
+
+# Instances of Departments
+ex:dept1 a ex:Department ;
+    ex:name "Computer Science Department"@en ;
+    ex:location "Building A"@en ;
+    ex:offers ex:course1, ex:course2 .
+
+ex:dept2 a ex:Department ;
+    ex:name "Mathematics Department"@en ;
+    ex:location "Building B"@en ;
+    ex:offers ex:course3 .
+
+# Instances of Programs
+ex:program1 a ex:Program ;
+    ex:name "Computer Science"@en ;
+    ex:duration "4"^^xsd:int .
+
+ex:program2 a ex:Program ;
+    ex:name "Data Science"@en ;
+    ex:duration "2"^^xsd:int .
+
+ex:program3 a ex:Program ;
+    ex:name "Mathematics"@en ;
+    ex:duration "3"^^xsd:int .

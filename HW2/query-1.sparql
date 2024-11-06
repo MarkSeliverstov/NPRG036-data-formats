@@ -1,0 +1,10 @@
+# This query retrieves the names of students enrolled in "CS101" course.
+PREFIX ex: <http://example.org/vocabulary/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?studentName
+WHERE {
+  ?student a ex:Student ;
+           foaf:name ?studentName ;
+           ex:enrolls ex:course1 .
+}

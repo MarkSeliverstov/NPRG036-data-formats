@@ -1,0 +1,11 @@
+# This query retrieves the names of departments and the titles of the courses they offer.
+PREFIX ex: <http://example.org/vocabulary/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?departmentName ?courseTitle
+WHERE {
+  ?department a ex:Department ;
+              ex:name ?departmentName ;
+              ex:offers ?course .
+  ?course ex:title ?courseTitle .
+}
