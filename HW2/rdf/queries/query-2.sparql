@@ -1,0 +1,11 @@
+# Find Courses Offered by Each Department
+PREFIX ex: <http://example.org/vocabulary/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?teacherName (COUNT(?course) AS ?courseCount)
+WHERE {
+    ?teacher a ex:Teacher ;
+             foaf:name ?teacherName ;
+             ex:teaches ?course .
+}
+GROUP BY ?teacherName

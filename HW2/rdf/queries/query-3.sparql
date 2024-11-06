@@ -1,0 +1,11 @@
+# Average Grade for Each Course
+PREFIX ex: <http://example.org/vocabulary/>
+
+SELECT ?courseTitle (AVG(?grade) AS ?averageGrade)
+WHERE {
+    ?enrollment a ex:Enrollment ;
+                ex:course ?course ;
+                ex:grade ?grade .
+    ?course ex:title ?courseTitle .
+}
+GROUP BY ?courseTitle

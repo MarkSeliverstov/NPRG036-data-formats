@@ -1,0 +1,12 @@
+# Number of Students in Each Department’s Courses
+PREFIX ex: <http://example.org/vocabulary/>
+
+SELECT ?departmentName (COUNT(?student) AS ?studentCount)
+WHERE {
+    ?department a ex:Department ;
+                ex:name ?departmentName ;
+                ex:offers ?course .
+    ?enrollment ex:course ?course .
+    ?student ex:hasEnrolled ?enrollment .
+}
+GROUP BY ?departmentName
