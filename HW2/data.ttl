@@ -89,6 +89,22 @@ ex:duration a rdf:Property ;
     rdfs:range xsd:int ;
     rdfs:label "Program duration" .
 
+# Enrollment-specific properties
+ex:grade a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range xsd:int ;
+    rdfs:label "Grade" .
+
+ex:enrolledOn a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range xsd:date ;
+    rdfs:label "Enrollment date" .
+
+ex:completedOn a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range xsd:date ;
+    rdfs:label "Completion date" .
+
 # Sample Data
 # Instances of Students
 ex:student1 a ex:Student ;
@@ -158,3 +174,21 @@ ex:program2 a ex:Program ;
 ex:program3 a ex:Program ;
     ex:name "Mathematics"@en ;
     ex:duration "3"^^xsd:int .
+
+# Instances of Enrollments
+ex:enrollment1 a ex:Enrollment ;
+    ex:grade 85 ;
+    ex:enrolledOn "2023-09-01"^^xsd:date ;
+    ex:completedOn "2024-05-15"^^xsd:date ;
+    ex:course ex:course1 .
+
+ex:enrollment2 a ex:Enrollment ;
+    ex:grade 90 ;
+    ex:enrolledOn "2023-09-01"^^xsd:date ;
+    ex:course ex:course2 .
+
+ex:enrollment3 a ex:Enrollment ;
+    ex:grade 78 ;
+    ex:enrolledOn "2022-09-01"^^xsd:date ;
+    ex:completedOn "2023-05-15"^^xsd:date ;
+    ex:course ex:course3 .

@@ -1,11 +1,14 @@
-# This query retrieves the names of departments and the titles of the courses they offer.
 PREFIX ex: <http://example.org/vocabulary/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-SELECT ?departmentName ?courseTitle
+# This query retrieves students' names, their grades, and the courses they are enrolled in.
+SELECT ?studentName ?courseTitle ?grade
 WHERE {
-  ?department a ex:Department ;
-              ex:name ?departmentName ;
-              ex:offers ?course .
+  ?enrollment a ex:Enrollment ;
+              ex:grade ?grade ;
+              ex:course ?course .
+  ?student a ex:Student ;
+           foaf:name ?studentName ;
+           ex:enrolls ?course .
   ?course ex:title ?courseTitle .
 }
