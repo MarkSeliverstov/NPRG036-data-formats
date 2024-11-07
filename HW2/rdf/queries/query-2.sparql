@@ -1,0 +1,14 @@
+# Retrieve Students with Grades and Courses They Completed
+PREFIX ex: <http://example.org/vocabulary/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?studentName ?courseTitle ?grade ?completedOn
+WHERE {
+    ?student a ex:Student ;
+             foaf:name ?studentName ;
+             ex:hasEnrolled ?enrollment .
+    ?enrollment ex:course ?course ;
+                ex:grade ?grade ;
+                ex:completedOn ?completedOn .
+    ?course ex:title ?courseTitle .
+}

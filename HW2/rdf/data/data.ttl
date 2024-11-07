@@ -1,0 +1,260 @@
+@prefix ex: <http://example.org/vocabulary/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+# Metadata
+ex:
+    rdf:type dctypes:Dataset ;
+    dct:title "Student Information System"@en ;
+    dct:alternative "SIS"@en ;
+    dct:description "A simple student information system dataset"@en ;
+    dct:publisher ex:university .
+
+ex:university a foaf:Organization ;
+    foaf:label "University"@en .
+
+# Definition of Classes
+ex:Person a rdfs:Class ;
+    rdfs:label "Person"@en .
+
+ex:Student a rdfs:Class ;
+    rdfs:label "Student"@en ;
+    rdfs:subClassOf ex:Person .
+
+ex:Teacher a rdfs:Class ;
+    rdfs:label "Teacher"@en ;
+    rdfs:subClassOf ex:Person .
+
+ex:Course a rdfs:Class ;
+    rdfs:label "Course"@en .
+
+ex:Enrollment a rdfs:Class ;
+    rdfs:label "Enrollment"@en .
+
+ex:Department a rdfs:Class ;
+    rdfs:label "Department"@en .
+
+ex:Program a rdfs:Class ;
+    rdfs:label "Program"@en .
+
+# Definition of properties
+
+# For Person
+ex:id a rdf:Property ;
+    rdfs:label "id" ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:int .
+
+ex:hasEmail a rdf:Property ;
+    rdfs:label "Has email"@en ;
+    rdfs:domain ex:Person ;
+    rdfs:range rdfs:Resource .
+
+ex:hasPhone a rdf:Property ;
+    rdfs:label "Has phone"@en ;
+    rdfs:domain ex:Person ;
+    rdfs:range rdfs:Resource .
+
+# For Student
+
+ex:hasEnrolled a rdf:Property ;
+    rdfs:domain ex:Student ;
+    rdfs:range ex:Enrollment ;
+    rdfs:label "has enrolled in"@en .
+
+ex:enrolledIn a rdf:Property ;
+    rdfs:domain ex:Student ;
+    rdfs:range ex:Program ;
+    rdfs:label "enrolled in program"@en .
+
+# For Program
+
+ex:duration a rdf:Property ;
+    rdfs:label "Duration"@en ;
+    rdfs:domain ex:Program ;
+    rdfs:range xsd:int .
+
+# For Enrollment
+
+ex:grade a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range xsd:int ;
+    rdfs:label "grade"@en .
+
+ex:enroledOn a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range xsd:date ;
+    rdfs:label "enrolled on"@en .
+
+ex:completedOn a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range xsd:date ;
+    rdfs:label "completed on"@en .
+
+ex:course a rdf:Property ;
+    rdfs:domain ex:Enrollment ;
+    rdfs:range ex:Course ;
+    rdfs:label "course"@en .
+
+# For Course
+
+ex:code a rdf:Property ;
+    rdfs:domain ex:Course ;
+    rdfs:range xsd:string ;
+    rdfs:label "code"@en .
+
+ex:title a rdf:Property ;
+    rdfs:domain ex:Course ;
+    rdfs:range xsd:string ;
+    rdfs:label "title"@en .
+
+ex:credits a rdf:Property ;
+    rdfs:domain ex:Course ;
+    rdfs:range xsd:int ;
+    rdfs:label "credits"@en .
+
+# For Department
+
+ex:offers a rdf:Property ;
+    rdfs:domain ex:Department ;
+    rdfs:range ex:Course ;
+    rdfs:label "offers"@en .
+
+ex:location a rdf:Property ;
+    rdfs:domain ex:Department ;
+    rdfs:range xsd:string ;
+    rdfs:label "location"@en .
+
+# For Teacher
+
+ex:teaches a rdf:Property ;
+    rdfs:domain ex:Teacher ;
+    rdfs:range ex:Course ;
+    rdfs:label "teaches"@en .
+
+ex:belongsTo a rdf:Property ;
+    rdfs:domain ex:Teacher ;
+    rdfs:range ex:Department ;
+    rdfs:label "belongs to"@en .
+
+# Sample Data
+# Instances of Students
+ex:student1 a ex:Student ;
+    ex:id "1"^^xsd:int ;
+    foaf:name "Alice"@en ;
+    ex:hasEmail <mailto:student1@b.cz> ;
+    ex:hasPhone <tel:+123456789> ;
+    ex:enrolledIn ex:program1 ;
+    ex:hasEnrolled ex:enrollment1 .
+               
+
+ex:student2 a ex:Student ;
+    ex:id "2"^^xsd:int ;
+    foaf:name "Bob"@en ;
+    ex:hasEmail <mailto:bob@b.cz> ;
+    ex:hasPhone <tel:+987654321> ;
+    ex:enrolledIn ex:program2 ;
+    ex:hasEnrolled ex:enrollment2 .
+
+ex:student3 a ex:Student ;
+    ex:id "3"^^xsd:int ;
+    foaf:name "Charlie"@en ;
+    ex:hasEmail <mailto:Charlie@a.cz> ;
+    ex:hasPhone <tel:+123456789> ;
+    ex:enrolledIn ex:program3 ;
+    ex:hasEnrolled ex:enrollment3 .
+
+# Instances of Teachers
+ex:teacher1 a ex:Teacher ;
+    ex:id "1"^^xsd:int ;
+    foaf:name "Dr. Smith"@en ;
+    ex:hasEmail <mailto:smith@b.cz> ;
+    ex:hasPhone <tel:+77777777> ;
+    ex:teaches ex:course1 ,
+               ex:course2 ;
+    ex:belongsTo ex:dept1 .
+
+ex:teacher2 a ex:Teacher ;
+    ex:id "2"^^xsd:int ;
+    foaf:name "Dr. Miller"@en ;
+    ex:hasEmail <mailto:Miller@b.cz> ;
+    ex:hasPhone <tel:+77888777> ;
+    ex:teaches ex:course3 ;
+    ex:belongsTo ex:dept2 .
+
+ex:teacher3 a ex:Teacher ;
+    ex:id "3"^^xsd:int ;
+    foaf:name "Dr. Brown"@en ;
+    ex:hasEmail <mailto:brown@a.cz> ;
+    ex:hasPhone <tel:+123456789> ;
+    ex:teaches ex:course3 ;
+    ex:belongsTo ex:dept2 .
+
+# Instances of Programs
+ex:program1 a ex:Program ;
+    ex:name "Computer Science"@en ;
+    ex:duration "4"^^xsd:int .
+
+ex:program2 a ex:Program ;
+    ex:name "Data Science"@en ;
+    ex:duration "2"^^xsd:int .
+
+ex:program3 a ex:Program ;
+    ex:name "Mathematics"@en ;
+    ex:duration "3"^^xsd:int .
+
+# Instances of Enrollments
+ex:enrollment1 a ex:Enrollment ;
+    ex:grade "2"^^xsd:int ;
+    ex:enrolledOn "2020-09-01"^^xsd:date ;
+    ex:completedOn "2021-01-01"^^xsd:date ;
+    ex:course ex:course1 .
+
+ex:enrollment2 a ex:Enrollment ;
+    ex:grade "1"^^xsd:int ;
+    ex:enrolledOn "2020-09-01"^^xsd:date ;
+    ex:completedOn "2021-01-01"^^xsd:date ;
+    ex:course ex:course2 .
+
+ex:enrollment3 a ex:Enrollment ;
+    ex:grade "3"^^xsd:int ;
+    ex:enrolledOn "2020-09-01"^^xsd:date ;
+    ex:completedOn "2021-01-01"^^xsd:date ;
+    ex:course ex:course3 .
+  
+# Instances of Courses
+ex:course1 a ex:Course ;
+    ex:code "CS101" ;
+    ex:title "Introduction to Computer Science"@en ;
+    ex:credits "4"^^xsd:int .
+
+ex:course2 a ex:Course ;
+    ex:code "CS102" ;
+    ex:title "Data Structures"@en ;
+    ex:credits "3"^^xsd:int .
+
+ex:course3 a ex:Course ;
+    ex:code "CS103" ;
+    ex:title "Algorithms"@en ;
+    ex:credits "4"^^xsd:int .
+
+# Instances of Departments
+ex:dept1 a ex:Department ;
+    ex:name "Computer Science Department"@en ;
+    ex:location "Building A"@en ;
+    ex:offers ex:course1 .
+
+ex:dept2 a ex:Department ;
+    ex:name "Mathematics Department"@en ;
+    ex:location "Building B"@en ;
+    ex:offers ex:course3 .
+
+ex:dept3 a ex:Department ;
+    ex:name "Physics Department"@en ;
+    ex:location "Building C"@en ;
+    ex:offers ex:course2 .
