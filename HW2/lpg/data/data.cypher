@@ -21,8 +21,8 @@ CREATE (teacher2:Teacher {id: 2, name: "Dr. Miller", email: "Miller@b.cz", phone
 CREATE (teacher3:Teacher {id: 3, name: "Dr. Brown", email: "brown@a.cz", phone: "+123456789"});
 
 CREATE (enrollment1:Enrollment {title: "Enrollment", grade: 2, enrolledOn: date("2020-09-01"), completedOn: date("2021-01-01")});
-CREATE (enrollment2:Enrollment {grade: 1, enrolledOn: date("2020-09-01"), completedOn: date("2021-01-01")});
-CREATE (enrollment3:Enrollment {grade: 3, enrolledOn: date("2020-09-01"), completedOn: date("2021-01-01")});
+CREATE (enrollment2:Enrollment {title: "Enrollment", grade: 1, enrolledOn: date("2020-09-01"), completedOn: date("2021-01-01")});
+CREATE (enrollment3:Enrollment {title: "Enrollment", grade: 3, enrolledOn: date("2020-09-01"), completedOn: date("2021-01-01")});
 
 MATCH (s1:Student {name: "Alice"}), (p1:Program {name: "Computer Science"})
 CREATE (s1)-[:ENROLLED_IN_PROGRAM {year: 2019}]->(p1);
@@ -34,13 +34,13 @@ MATCH (s3:Student {name: "Charlie"}), (p3:Program {name: "Mathematics"})
 CREATE (s3)-[:ENROLLED_IN_PROGRAM {year: 2021}]->(p3);
 
 MATCH (s1:Student {name: "Alice"}), (e1:Enrollment {grade: 2}), (c1:Course {code: "CS101"})
-CREATE (s1)-[:HAS_ENROLLED {semester: "Fall", year: 2020}]->(e1)-[:ENROLLED_IN_COURSE {semester: "Fall", year: 2020}]->(c1);
+CREATE (s1)-[:HAS_ENROLLED {semester: "Fall", year: 2020}]->(e1)-[:ENROLLED_IN_COURSE]->(c1);
 
 MATCH (s2:Student {name: "Bob"}), (e2:Enrollment {grade: 1}), (c2:Course {code: "CS102"})
-CREATE (s2)-[:HAS_ENROLLED {semester: "Spring", year: 2021}]->(e2)-[:ENROLLED_IN_COURSE {semester: "Spring", year: 2021}]->(c2);
+CREATE (s2)-[:HAS_ENROLLED {semester: "Spring", year: 2021}]->(e2)-[:ENROLLED_IN_COURSE]->(c2);
 
 MATCH (s3:Student {name: "Charlie"}), (e3:Enrollment {grade: 3}), (c3:Course {code: "CS103"})
-CREATE (s3)-[:HAS_ENROLLED {semester: "Fall", year: 2021}]->(e3)-[:ENROLLED_IN_COURSE {semester: "Fall", year: 2021}]->(c3);
+CREATE (s3)-[:HAS_ENROLLED {semester: "Fall", year: 2021}]->(e3)-[:ENROLLED_IN_COURSE]->(c3);
 
 MATCH (t1:Teacher {name: "Dr. Smith"}), (d1:Department {name: "Computer Science Department"})
 CREATE (t1)-[:BELONGS_TO {since: 2018}]->(d1);

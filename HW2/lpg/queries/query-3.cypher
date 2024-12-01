@@ -4,6 +4,5 @@ MATCH (c)<-[teach_rel:TEACHES]-(t:Teacher)
 RETURN s.name AS Student, 
        c.title AS Course, 
        t.name AS Teacher,
-       enroll_rel.year AS Year, 
-       course_rel.semester AS Semester
-ORDER BY Student, Year DESC, Semester, Course
+       enroll_rel.year AS Year
+ORDER BY Student, Year DESC, Course
