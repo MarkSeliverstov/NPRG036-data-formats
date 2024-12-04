@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ex:students xmlns:ex="http://example.org/vocabulary/"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://example.org/vocabulary/ ../schemas/schema-2.xsd">
+    
+    <!-- Student: Alice -->
+    <ex:student id="s1">
+        <ex:name xml:lang="en">Alice</ex:name>
+        <ex:email>student1@b.cz</ex:email>
+        <ex:phone>+123456789</ex:phone>
+        <ex:programEnrollment year="2019">
+            <ex:program id="p1">
+                <ex:name xml:lang="en">Computer Science</ex:name>
+                <ex:duration>4</ex:duration>
+            </ex:program>
+        </ex:programEnrollment>
+        <ex:courseEnrollments>
+            <ex:enrollment id="e1" courseRef="c1" semester="Fall" year="2020">
+                <ex:grade>2</ex:grade>
+                <ex:enrolledOn>2020-09-01</ex:enrolledOn>
+                <ex:completedOn>2021-01-01</ex:completedOn>
+            </ex:enrollment>
+        </ex:courseEnrollments>
+    </ex:student>
+
+    <!-- Student: Bob -->
+    <ex:student id="s2">
+        <ex:name xml:lang="en">Bob</ex:name>
+        <ex:email>bob@b.cz</ex:email>
+        <ex:phone>+987654321</ex:phone>
+        <ex:programEnrollment year="2020">
+            <ex:program id="p2">
+                <ex:name xml:lang="en">Data Science</ex:name>
+                <ex:duration>2</ex:duration>
+            </ex:program>
+        </ex:programEnrollment>
+        <ex:courseEnrollments>
+            <ex:enrollment id="e2" courseRef="c2" semester="Spring" year="2021">
+                <ex:grade>1</ex:grade>
+                <ex:enrolledOn>2020-09-01</ex:enrolledOn>
+                <ex:completedOn>2021-01-01</ex:completedOn>
+            </ex:enrollment>
+        </ex:courseEnrollments>
+    </ex:student>
+
+    <!-- Student: Charlie -->
+    <ex:student id="s3">
+        <ex:name xml:lang="en">Charlie</ex:name>
+        <ex:email>Charlie@a.cz</ex:email>
+        <ex:phone>+123456789</ex:phone>
+        <ex:programEnrollment year="2021">
+            <ex:program id="p3">
+                <ex:name xml:lang="en">Mathematics</ex:name>
+                <ex:duration>3</ex:duration>
+            </ex:program>
+        </ex:programEnrollment>
+        <ex:courseEnrollments>
+            <ex:enrollment id="e3" courseRef="c3" semester="Fall" year="2021">
+                <ex:grade>3</ex:grade>
+                <ex:enrolledOn>2020-09-01</ex:enrolledOn>
+                <ex:completedOn>2021-01-01</ex:completedOn>
+            </ex:enrollment>
+        </ex:courseEnrollments>
+    </ex:student>
+</ex:students>

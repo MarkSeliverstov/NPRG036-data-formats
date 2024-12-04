@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ex:departments xmlns:ex="http://example.org/vocabulary/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://example.org/vocabulary/ ../schemas/schema-1.xsd">
+    
+    <!-- Computer Science Department -->
+    <ex:department id="d1">
+        <ex:name xml:lang="en">Computer Science Department</ex:name>
+        <ex:location xml:lang="en">Building A</ex:location>
+        <ex:teachers>
+            <ex:teacher id="t1" since="2018">
+                <ex:name xml:lang="en">Dr. Smith</ex:name>
+                <ex:email>smith@b.cz</ex:email>
+                <ex:phone>+77777777</ex:phone>
+                <ex:teaches courseRef="c1" rating="4.5"/>
+                <ex:teaches courseRef="c2" rating="4.7"/>
+            </ex:teacher>
+        </ex:teachers>
+        <ex:courses>
+            <ex:course id="c1">
+                <ex:code>CS101</ex:code>
+                <ex:title xml:lang="en">Introduction to Computer Science</ex:title>
+                <ex:credits>4</ex:credits>
+                <ex:popularity>95</ex:popularity>
+            </ex:course>
+        </ex:courses>
+    </ex:department>
+
+    <!-- Mathematics Department -->
+    <ex:department id="d2">
+        <ex:name xml:lang="en">Mathematics Department</ex:name>
+        <ex:location xml:lang="en">Building B</ex:location>
+        <ex:teachers>
+            <ex:teacher id="t2" since="2019">
+                <ex:name xml:lang="en">Dr. Miller</ex:name>
+                <ex:email>Miller@b.cz</ex:email>
+                <ex:phone>+77888777</ex:phone>
+                <ex:teaches courseRef="c3" rating="4.2"/>
+            </ex:teacher>
+            <ex:teacher id="t3" since="2020">
+                <ex:name xml:lang="en">Dr. Brown</ex:name>
+                <ex:email>brown@a.cz</ex:email>
+                <ex:phone>+123456789</ex:phone>
+                <ex:teaches courseRef="c3" rating="4.0"/>
+            </ex:teacher>
+        </ex:teachers>
+        <ex:courses>
+            <ex:course id="c3">
+                <ex:code>CS103</ex:code>
+                <ex:title xml:lang="en">Algorithms</ex:title>
+                <ex:credits>4</ex:credits>
+                <ex:popularity>85</ex:popularity>
+            </ex:course>
+        </ex:courses>
+    </ex:department>
+
+    <!-- Physics Department -->
+    <ex:department id="d3">
+        <ex:name xml:lang="en">Physics Department</ex:name>
+        <ex:location xml:lang="en">Building C</ex:location>
+        <ex:courses>
+            <ex:course id="c2">
+                <ex:code>CS102</ex:code>
+                <ex:title xml:lang="en">Data Structures</ex:title>
+                <ex:credits>3</ex:credits>
+                <ex:popularity>78</ex:popularity>
+            </ex:course>
+        </ex:courses>
+    </ex:department>
+</ex:departments>

@@ -1,0 +1,14 @@
+ (:Description: Calculate average grade for each student and show those above program average:)
+//ex:student[
+  avg(ex:courseEnrollments/ex:enrollment/ex:grade) < 
+  avg(//ex:student[
+    ex:programEnrollment/ex:program/@id = 
+    current()/ex:programEnrollment/ex:program/@id
+  ]/ex:courseEnrollments/ex:enrollment/ex:grade)
+]/concat(
+  ex:name, 
+  ' (', 
+  ex:programEnrollment/ex:program/ex:name, 
+  ') - Average: ',
+  avg(ex:courseEnrollments/ex:enrollment/ex:grade)
+)

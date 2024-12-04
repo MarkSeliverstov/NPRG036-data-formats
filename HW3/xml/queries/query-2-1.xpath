@@ -1,0 +1,5 @@
+(:Description: Find students who are enrolled in the same program length as their current course count:)
+//ex:student[
+  count(ex:courseEnrollments/ex:enrollment) = 
+  ex:programEnrollment/ex:program/ex:duration
+]/ex:name

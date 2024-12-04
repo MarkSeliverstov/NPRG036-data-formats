@@ -1,0 +1,1 @@
+//ex:course[ex:popularity >= 85]/@id/ancestor::ex:department/ex:teachers/ex:teacher/ex:name
