@@ -1,0 +1,174 @@
+{
+    "@context": {
+        "ex": "http://example.org/vocabulary/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "hasDepartment": {
+            "@id": "ex:hasDepartment",
+            "@type": "@id"
+        },
+        "name": {
+            "@id": "ex:name",
+            "@language": "en"
+        },
+        "location": {
+            "@id": "ex:location",
+            "@language": "en"
+        },
+        "hasTeacher": {
+            "@id": "ex:hasTeacher",
+            "@type": "@id"
+        },
+        "teacherName": {
+            "@id": "foaf:name",
+            "@language": "en"
+        },
+        "id": {
+            "@id": "ex:id",
+            "@type": "xsd:integer"
+        },
+        "code": {
+            "@id": "ex:code"
+        },
+        "title": {
+            "@id": "ex:title",
+            "@language": "en"
+        },
+        "credits": {
+            "@id": "ex:credits",
+            "@type": "xsd:integer"
+        },
+        "popularity": {
+            "@id": "ex:popularity",
+            "@type": "xsd:integer"
+        },
+        "rating": {
+            "@id": "ex:rating",
+            "@type": "xsd:decimal"
+        },
+        "hasEmail": {
+            "@id": "ex:hasEmail",
+            "@type": "@id"
+        },
+        "hasPhone": {
+            "@id": "ex:hasPhone",
+            "@type": "@id"
+        },
+        "belongsTo": {
+            "@id": "ex:belongsTo",
+            "@type": "@id"
+        },
+        "offers": {
+            "@id": "ex:offers",
+            "@type": "@id"
+        },
+        "teaches": {
+            "@id": "ex:teaches",
+            "@type": "@id"
+        }
+    },
+    "@graph": [
+        {
+            "@id": "ex:dept1",
+            "@type": "ex:Department",
+            "name": "Computer Science Department",
+            "location": "Building A",
+            "offers": "ex:course1",
+            "hasTeacher": "ex:teacher1"
+        },
+        {
+            "@id": "ex:teacher1",
+            "@type": "ex:Teacher",
+            "id": 1,
+            "teacherName": "Dr. Smith",
+            "hasEmail": "mailto:smith@b.cz",
+            "hasPhone": "tel:+77777777",
+            "teaches": [
+                {
+                    "@type": "ex:Teaching",
+                    "course": {"@id": "ex:course1"},
+                    "rating": 4.5
+                },
+                {
+                    "@type": "ex:Teaching",
+                    "course": {"@id": "ex:course2"},
+                    "rating": 4.7
+                }
+            ],
+            "belongsTo": "ex:dept1"
+        },
+        {
+            "@id": "ex:course1",
+            "@type": "ex:Course",
+            "code": "CS101",
+            "title": "Introduction to Computer Science",
+            "credits": 4,
+            "popularity": 95
+        },
+        {
+            "@id": "ex:dept2",
+            "@type": "ex:Department",
+            "name": "Mathematics Department",
+            "location": "Building B",
+            "offers": "ex:course3",
+            "hasTeacher": ["ex:teacher2", "ex:teacher3"]
+        },
+        {
+            "@id": "ex:teacher2",
+            "@type": "ex:Teacher",
+            "id": 2,
+            "teacherName": "Dr. Miller",
+            "hasEmail": "mailto:Miller@b.cz",
+            "hasPhone": "tel:+77888777",
+            "teaches": [
+                {
+                    "@type": "ex:Teaching",
+                    "course": {"@id": "ex:course3"},
+                    "rating": 4.2
+                }
+            ],
+            "belongsTo": "ex:dept2"
+        },
+        {
+            "@id": "ex:teacher3",
+            "@type": "ex:Teacher",
+            "id": 3,
+            "teacherName": "Dr. Brown",
+            "hasEmail": "mailto:brown@a.cz",
+            "hasPhone": "tel:+123456789",
+            "teaches": [
+                {
+                    "@type": "ex:Teaching",
+                    "course": {"@id": "ex:course3"},
+                    "rating": 4.0
+                }
+            ],
+            "belongsTo": "ex:dept2"
+        },
+        {
+            "@id": "ex:course3",
+            "@type": "ex:Course",
+            "code": "CS103",
+            "title": "Algorithms",
+            "credits": 4,
+            "popularity": 85
+        },
+        {
+            "@id": "ex:dept3",
+            "@type": "ex:Department",
+            "name": "Physics Department",
+            "location": "Building C",
+            "offers": "ex:course2"
+        },
+        {
+            "@id": "ex:course2",
+            "@type": "ex:Course",
+            "code": "CS102",
+            "title": "Data Structures",
+            "credits": 3,
+            "popularity": 78
+        }
+    ]
+}

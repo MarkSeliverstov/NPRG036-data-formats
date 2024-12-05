@@ -1,0 +1,3 @@
+(: Description: Find departments that only offer courses worth 4 credits.
+   Shows use of complex negation and nested predicates for data filtering. :)
+//ex:department[not(ex:courses/ex:course[ex:credits != 4])]

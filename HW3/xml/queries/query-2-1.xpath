@@ -1,0 +1,3 @@
+(: Description: Find students with perfect grades (1) and show their program names.
+   Demonstrates combining multiple conditions and parent-child relationships. :)
+//ex:student[.//ex:enrollment/ex:grade = 1]/ex:programEnrollment/ex:program/ex:name

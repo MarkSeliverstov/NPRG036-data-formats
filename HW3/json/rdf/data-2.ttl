@@ -1,0 +1,65 @@
+PREFIX ex: <http://example.org/vocabulary/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+ex:enrollment1  rdf:type  ex:Enrollment;
+        ex:completedOn  "2021-01-01"^^xsd:date;
+        ex:course       ex:course1;
+        ex:enrolledOn   "2020-09-01"^^xsd:date;
+        ex:grade        2;
+        ex:semester     "Fall"@en;
+        ex:year         2020 .
+
+ex:enrollment2  rdf:type  ex:Enrollment;
+        ex:completedOn  "2021-01-01"^^xsd:date;
+        ex:course       ex:course2;
+        ex:enrolledOn   "2020-09-01"^^xsd:date;
+        ex:grade        1;
+        ex:semester     "Spring"@en;
+        ex:year         2021 .
+
+ex:enrollment3  rdf:type  ex:Enrollment;
+        ex:completedOn  "2021-01-01"^^xsd:date;
+        ex:course       ex:course3;
+        ex:enrolledOn   "2020-09-01"^^xsd:date;
+        ex:grade        3;
+        ex:semester     "Fall"@en;
+        ex:year         2021 .
+
+ex:program1  rdf:type  ex:Program;
+        ex:duration  4;
+        ex:name      "Computer Science"@en .
+
+ex:program2  rdf:type  ex:Program;
+        ex:duration  2;
+        ex:name      "Data Science"@en .
+
+ex:program3  rdf:type  ex:Program;
+        ex:duration  3;
+        ex:name      "Mathematics"@en .
+
+ex:student1  rdf:type   ex:Student;
+        ex:enrolledIn   ex:program1;
+        ex:hasEmail     <mailto:student1@b.cz>;
+        ex:hasEnrolled  ex:enrollment1;
+        ex:hasPhone     <tel:+123456789>;
+        ex:id           1;
+        foaf:name       "Alice"@en .
+
+ex:student2  rdf:type   ex:Student;
+        ex:enrolledIn   ex:program2;
+        ex:hasEmail     <mailto:bob@b.cz>;
+        ex:hasEnrolled  ex:enrollment2;
+        ex:hasPhone     <tel:+987654321>;
+        ex:id           2;
+        foaf:name       "Bob"@en .
+
+ex:student3  rdf:type   ex:Student;
+        ex:enrolledIn   ex:program3;
+        ex:hasEmail     <mailto:Charlie@a.cz>;
+        ex:hasEnrolled  ex:enrollment3;
+        ex:hasPhone     <tel:+123456789>;
+        ex:id           3;
+        foaf:name       "Charlie"@en .

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ex="http://example.org/vocabulary/"
+           targetNamespace="http://example.org/vocabulary/"
+           elementFormDefault="qualified">
+
+    <!-- Import XML namespace for xml:lang -->
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+               schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+
+    <!-- Define a complex type for elements that need xml:lang -->
+    <xs:complexType name="localizedString">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute ref="xml:lang" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Department Type -->
+    <xs:complexType name="DepartmentType">
+        <xs:sequence>
+            <xs:element name="name" type="ex:localizedString"/>
+            <xs:element name="location" type="ex:localizedString"/>
+            <xs:element name="teachers" type="ex:TeachersListType" minOccurs="0"/>
+            <xs:element name="courses" type="ex:CoursesListType"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="ex:DepartmentIDType" use="required"/>
+    </xs:complexType>
+
+    <!-- Teacher Type -->
+    <xs:complexType name="TeacherType">
+        <xs:sequence>
+            <xs:element name="name" type="ex:localizedString"/>
+            <xs:element name="email" type="ex:EmailType"/>
+            <xs:element name="phone" type="ex:PhoneType" maxOccurs="unbounded"/>
+            <xs:element name="teaches" type="ex:TeachingAssignmentType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="ex:TeacherIDType" use="required"/>
+        <xs:attribute name="since" type="xs:integer" use="required"/>
+    </xs:complexType>
+
+    <!-- Course Type -->
+    <xs:complexType name="CourseType">
+        <xs:sequence>
+            <xs:element name="code" type="ex:CourseCodeType"/>
+            <xs:element name="title" type="ex:localizedString"/>
+            <xs:element name="credits" type="ex:CreditsType"/>
+            <xs:element name="popularity" type="xs:integer"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="ex:CourseIDType" use="required"/>
+    </xs:complexType>
+
+    <!-- List Types -->
+    <xs:complexType name="TeachersListType">
+        <xs:sequence>
+            <xs:element name="teacher" type="ex:TeacherType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CoursesListType">
+        <xs:sequence>
+            <xs:element name="course" type="ex:CourseType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Teaching Assignment Type -->
+    <xs:complexType name="TeachingAssignmentType">
+        <xs:attribute name="courseRef" type="xs:IDREF" use="required"/>
+        <xs:attribute name="rating" type="ex:RatingType" use="required"/>
+    </xs:complexType>
+
+    <!-- Simple Types for Validation -->
+    <xs:simpleType name="DepartmentIDType">
+        <xs:restriction base="xs:ID">
+            <xs:pattern value="d[0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TeacherIDType">
+        <xs:restriction base="xs:ID">
+            <xs:pattern value="t[0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CourseIDType">
+        <xs:restriction base="xs:ID">
+            <xs:pattern value="c[0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CourseCodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="CS[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CreditsType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RatingType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.0"/>
+            <xs:maxInclusive value="5.0"/>
+            <xs:fractionDigits value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EmailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^\.]+\..+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PhoneType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\+[0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Root Element -->
+    <xs:element name="departments">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="department" type="ex:DepartmentType" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+
+        <!-- Key/Keyref constraints -->
+        <xs:key name="DepartmentKey">
+            <xs:selector xpath="ex:department"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+
+        <xs:key name="CourseKey">
+            <xs:selector xpath=".//ex:course"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+
+        <xs:keyref name="TeachingCourseRef" refer="ex:CourseKey">
+            <xs:selector xpath=".//ex:teaches"/>
+            <xs:field xpath="@courseRef"/>
+        </xs:keyref>
+    </xs:element>
+
+</xs:schema>

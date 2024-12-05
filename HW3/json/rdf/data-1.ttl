@@ -1,0 +1,78 @@
+PREFIX ex: <http://example.org/vocabulary/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+_:b0    rdf:type   ex:Teaching;
+        ex:rating  "4.5E0"^^xsd:decimal .
+
+_:b1    rdf:type   ex:Teaching;
+        ex:rating  "4.7E0"^^xsd:decimal .
+
+_:b2    rdf:type   ex:Teaching;
+        ex:rating  "4.2E0"^^xsd:decimal .
+
+_:b3    rdf:type   ex:Teaching;
+        ex:rating  "4"^^xsd:decimal .
+
+ex:course1  rdf:type   ex:Course;
+        ex:code        "CS101";
+        ex:credits     4;
+        ex:popularity  95;
+        ex:title       "Introduction to Computer Science"@en .
+
+ex:course2  rdf:type   ex:Course;
+        ex:code        "CS102";
+        ex:credits     3;
+        ex:popularity  78;
+        ex:title       "Data Structures"@en .
+
+ex:course3  rdf:type   ex:Course;
+        ex:code        "CS103";
+        ex:credits     4;
+        ex:popularity  85;
+        ex:title       "Algorithms"@en .
+
+ex:dept1  rdf:type     ex:Department;
+        ex:hasTeacher  ex:teacher1;
+        ex:location    "Building A"@en;
+        ex:name        "Computer Science Department"@en;
+        ex:offers      ex:course1 .
+
+ex:dept2  rdf:type     ex:Department;
+        ex:hasTeacher  ex:teacher2;
+        ex:hasTeacher  ex:teacher3;
+        ex:location    "Building B"@en;
+        ex:name        "Mathematics Department"@en;
+        ex:offers      ex:course3 .
+
+ex:dept3  rdf:type   ex:Department;
+        ex:location  "Building C"@en;
+        ex:name      "Physics Department"@en;
+        ex:offers    ex:course2 .
+
+ex:teacher1  rdf:type  ex:Teacher;
+        ex:belongsTo  ex:dept1;
+        ex:hasEmail   <mailto:smith@b.cz>;
+        ex:hasPhone   <tel:+77777777>;
+        ex:id         1;
+        ex:teaches    _:b0;
+        ex:teaches    _:b1;
+        foaf:name     "Dr. Smith"@en .
+
+ex:teacher2  rdf:type  ex:Teacher;
+        ex:belongsTo  ex:dept2;
+        ex:hasEmail   <mailto:Miller@b.cz>;
+        ex:hasPhone   <tel:+77888777>;
+        ex:id         2;
+        ex:teaches    _:b2;
+        foaf:name     "Dr. Miller"@en .
+
+ex:teacher3  rdf:type  ex:Teacher;
+        ex:belongsTo  ex:dept2;
+        ex:hasEmail   <mailto:brown@a.cz>;
+        ex:hasPhone   <tel:+123456789>;
+        ex:id         3;
+        ex:teaches    _:b3;
+        foaf:name     "Dr. Brown"@en .

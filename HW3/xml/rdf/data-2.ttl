@@ -1,0 +1,69 @@
+@prefix ex: <http://example.org/vocabulary/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:student1 a ex:Student ;
+    ex:id "1"^^xsd:integer ;
+    foaf:name "Alice"@en ;
+    ex:hasEmail <mailto:student1@b.cz> ;
+    ex:hasPhone <tel:+123456789> ;
+    ex:enrolledIn ex:program1 .
+
+ex:student2 a ex:Student ;
+    ex:id "2"^^xsd:integer ;
+    foaf:name "Bob"@en ;
+    ex:hasEmail <mailto:bob@b.cz> ;
+    ex:hasPhone <tel:+987654321> ;
+    ex:enrolledIn ex:program2 .
+
+ex:student3 a ex:Student ;
+    ex:id "3"^^xsd:integer ;
+    foaf:name "Charlie"@en ;
+    ex:hasEmail <mailto:Charlie@a.cz> ;
+    ex:hasPhone <tel:+123456789> ;
+    ex:enrolledIn ex:program3 .
+
+ex:program1 a ex:Program ;
+    ex:name "Computer Science"@en ;
+    ex:duration "4"^^xsd:integer .
+
+ex:program2 a ex:Program ;
+    ex:name "Data Science"@en ;
+    ex:duration "2"^^xsd:integer .
+
+ex:program3 a ex:Program ;
+    ex:name "Mathematics"@en ;
+    ex:duration "3"^^xsd:integer .
+
+ex:enrollment1 a ex:Enrollment ;
+    ex:grade "2"^^xsd:integer ;
+    ex:enrolledOn "2020-09-01"^^xsd:date ;
+    ex:completedOn "2021-01-01"^^xsd:date ;
+    ex:semester "Fall"@en ;
+    ex:year "2020"^^xsd:integer ;
+    ex:course ex:course1 .
+
+ex:student1 ex:hasEnrolled ex:enrollment1 .
+
+ex:enrollment2 a ex:Enrollment ;
+    ex:grade "1"^^xsd:integer ;
+    ex:enrolledOn "2020-09-01"^^xsd:date ;
+    ex:completedOn "2021-01-01"^^xsd:date ;
+    ex:semester "Spring"@en ;
+    ex:year "2021"^^xsd:integer ;
+    ex:course ex:course2 .
+
+ex:student2 ex:hasEnrolled ex:enrollment2 .
+
+ex:enrollment3 a ex:Enrollment ;
+    ex:grade "3"^^xsd:integer ;
+    ex:enrolledOn "2020-09-01"^^xsd:date ;
+    ex:completedOn "2021-01-01"^^xsd:date ;
+    ex:semester "Fall"@en ;
+    ex:year "2021"^^xsd:integer ;
+    ex:course ex:course3 .
+
+ex:student3 ex:hasEnrolled ex:enrollment3 .
+
