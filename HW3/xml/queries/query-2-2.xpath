@@ -1,14 +1,5 @@
- (:Description: Calculate average grade for each student and show those above program average:)
-//ex:student[
-  avg(ex:courseEnrollments/ex:enrollment/ex:grade) < 
-  avg(//ex:student[
-    ex:programEnrollment/ex:program/@id = 
-    current()/ex:programEnrollment/ex:program/@id
-  ]/ex:courseEnrollments/ex:enrollment/ex:grade)
-]/concat(
-  ex:name, 
-  ' (', 
-  ex:programEnrollment/ex:program/ex:name, 
-  ') - Average: ',
-  avg(ex:courseEnrollments/ex:enrollment/ex:grade)
-)
+(: Description: Find all enrollments in the Fall semester where the enrollment year 
+   is greater than the student's program enrollment year.
+   Shows complex date comparison and multi-level navigation. :)
+//ex:enrollment[@semester='Fall' and @year > 
+    ancestor::ex:student/ex:programEnrollment/@year]/ancestor::ex:student/ex:name

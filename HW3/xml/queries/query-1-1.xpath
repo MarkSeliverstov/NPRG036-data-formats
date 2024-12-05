@@ -1,1 +1,3 @@
+(: Description: Find teachers who teach courses with high popularity (>=85%) and return their names. 
+   This demonstrates combining multiple path steps with predicates and ancestor axis. :)
 //ex:course[ex:popularity >= 85]/@id/ancestor::ex:department/ex:teachers/ex:teacher/ex:name

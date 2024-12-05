@@ -1,0 +1,3 @@
+(: Description: Find departments without teachers and count their courses.
+   Demonstrates combining negation with counting and structural navigation. :)
+count(//ex:department[not(ex:teachers)]/ex:courses/ex:course)
