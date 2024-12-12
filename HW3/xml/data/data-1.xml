@@ -12,8 +12,8 @@
                 <ex:name xml:lang="en">Dr. Smith</ex:name>
                 <ex:email>smith@b.cz</ex:email>
                 <ex:phone>+77777777</ex:phone>
-                <ex:teaches courseRef="c1" rating="4.5"/>
-                <ex:teaches courseRef="c2" rating="4.7"/>
+                 <ex:teaches courseRef="c1" rating="4.5"/>
+                 <ex:teaches courseRef="c2" rating="4.7"/>
             </ex:teacher>
         </ex:teachers>
         <ex:courses>
@@ -21,7 +21,6 @@
                 <ex:code>CS101</ex:code>
                 <ex:title xml:lang="en">Introduction to Computer Science</ex:title>
                 <ex:credits>4</ex:credits>
-                <ex:popularity>95</ex:popularity>
             </ex:course>
         </ex:courses>
     </ex:department>
@@ -49,7 +48,6 @@
                 <ex:code>CS103</ex:code>
                 <ex:title xml:lang="en">Algorithms</ex:title>
                 <ex:credits>4</ex:credits>
-                <ex:popularity>85</ex:popularity>
             </ex:course>
         </ex:courses>
     </ex:department>
@@ -63,7 +61,6 @@
                 <ex:code>CS102</ex:code>
                 <ex:title xml:lang="en">Data Structures</ex:title>
                 <ex:credits>3</ex:credits>
-                <ex:popularity>78</ex:popularity>
             </ex:course>
         </ex:courses>
     </ex:department>

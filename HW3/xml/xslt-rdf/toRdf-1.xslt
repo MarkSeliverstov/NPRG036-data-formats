@@ -24,47 +24,44 @@
 
     <!-- Department template -->
     <xsl:template match="ex:department">
-        <xsl:text>ex:dept</xsl:text><xsl:value-of select="substring-after(@id, 'dept')"/>
+        <xsl:text>ex:dept</xsl:text><xsl:value-of select="substring-after(@id, 'd')"/>
         <xsl:text> a ex:Department ;&#xa;</xsl:text>
         <xsl:text>    ex:name "</xsl:text><xsl:value-of select="ex:name"/><xsl:text>"@en ;&#xa;</xsl:text>
-        <xsl:text>    ex:location "</xsl:text><xsl:value-of select="ex:location"/><xsl:text>"@en</xsl:text>
-        <xsl:for-each select="ex:courses/ex:course">
-            <xsl:text> ;&#xa;    ex:offers ex:course</xsl:text>
-            <xsl:value-of select="substring-after(@id, 'course')"/>
-        </xsl:for-each>
+        <xsl:text>    ex:location "</xsl:text><xsl:value-of select="ex:location"/><xsl:text>"@en ;&#xa;</xsl:text>
+        <xsl:text>    ex:offers ex:course</xsl:text>
+        <xsl:value-of select="substring-after(ex:courses/ex:course/@id, 'c')"/>
         <xsl:text> .&#xa;&#xa;</xsl:text>
     </xsl:template>
 
     <!-- Teacher template -->
     <xsl:template match="ex:teacher">
-        <xsl:text>ex:teacher</xsl:text><xsl:value-of select="substring-after(@id, 'teacher')"/>
+        <xsl:text>ex:teacher</xsl:text><xsl:value-of select="substring-after(@id, 't')"/>
         <xsl:text> a ex:Teacher ;&#xa;</xsl:text>
-        <xsl:text>    ex:id "</xsl:text><xsl:value-of select="substring-after(@id, 'teacher')"/><xsl:text>"^^xsd:integer ;&#xa;</xsl:text>
+        <xsl:text>    ex:id "</xsl:text><xsl:value-of select="substring-after(@id, 't')"/><xsl:text>"^^xsd:integer ;&#xa;</xsl:text>
         <xsl:text>    foaf:name "</xsl:text><xsl:value-of select="ex:name"/><xsl:text>"@en ;&#xa;</xsl:text>
         <xsl:text>    ex:hasEmail &lt;mailto:</xsl:text><xsl:value-of select="ex:email"/><xsl:text>&gt; ;&#xa;</xsl:text>
-        <xsl:text>    ex:hasPhone &lt;tel:</xsl:text><xsl:value-of select="ex:phone"/><xsl:text>&gt;</xsl:text>
+        <xsl:text>    ex:hasPhone &lt;tel:</xsl:text><xsl:value-of select="ex:phone"/><xsl:text>&gt; ;&#xa;</xsl:text>
+        <xsl:text>    ex:teaches </xsl:text>
         <xsl:for-each select="ex:teaches">
-            <xsl:text> ;&#xa;    ex:teaches [&#xa;</xsl:text>
-            <xsl:text>        ex:course ex:course</xsl:text>
-            <xsl:value-of select="substring-after(@courseRef, 'course')"/>
-            <xsl:text> ;&#xa;</xsl:text>
-            <xsl:text>        ex:rating "</xsl:text>
-            <xsl:value-of select="@rating"/>
-            <xsl:text>"^^xsd:decimal&#xa;    ]</xsl:text>
+            <xsl:text>ex:course</xsl:text>
+            <xsl:value-of select="substring-after(@courseRef, 'c')"/>
+            <xsl:if test="position() != last()">
+                <xsl:text> , </xsl:text>
+            </xsl:if>
         </xsl:for-each>
-        <xsl:text> ;&#xa;    ex:belongsTo ex:dept</xsl:text>
-        <xsl:value-of select="substring-after(ancestor::ex:department/@id, 'dept')"/>
+        <xsl:text> ;&#xa;</xsl:text>
+        <xsl:text>    ex:belongsTo ex:dept</xsl:text>
+        <xsl:value-of select="substring-after(ancestor::ex:department/@id, 'd')"/>
         <xsl:text> .&#xa;&#xa;</xsl:text>
     </xsl:template>
 
     <!-- Course template -->
     <xsl:template match="ex:course">
-        <xsl:text>ex:course</xsl:text><xsl:value-of select="substring-after(@id, 'course')"/>
+        <xsl:text>ex:course</xsl:text><xsl:value-of select="substring-after(@id, 'c')"/>
         <xsl:text> a ex:Course ;&#xa;</xsl:text>
         <xsl:text>    ex:code "</xsl:text><xsl:value-of select="ex:code"/><xsl:text>" ;&#xa;</xsl:text>
         <xsl:text>    ex:title "</xsl:text><xsl:value-of select="ex:title"/><xsl:text>"@en ;&#xa;</xsl:text>
-        <xsl:text>    ex:credits "</xsl:text><xsl:value-of select="ex:credits"/><xsl:text>"^^xsd:integer ;&#xa;</xsl:text>
-        <xsl:text>    ex:popularity "</xsl:text><xsl:value-of select="ex:popularity"/><xsl:text>"^^xsd:integer .&#xa;&#xa;</xsl:text>
+        <xsl:text>    ex:credits "</xsl:text><xsl:value-of select="ex:credits"/><xsl:text>"^^xsd:integer .&#xa;&#xa;</xsl:text>
     </xsl:template>
 
 </xsl:stylesheet>

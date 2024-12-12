@@ -1,19 +1,30 @@
-.students | {
+{
   enrollment_patterns: [
-    .[] | {
+    ."@graph"[] | 
+    select(."@type" == "ex:Student") | {
       student: .name,
-      pattern: [.courseEnrollments[] | {
-        semester,
-        year,
-        grade
-      }] | sort_by(.year, .semester)
+      program: (."@graph"[] | select(."@type" == "ex:Program" and ."@id" == .enrolledIn) | .programName),
+      enrollments: [
+        ."@graph"[] | 
+        select(."@type" == "ex:Enrollment" and .enrolledIn == ."@id") |
+        {
+          course: .course,
+          grade: .grade,
+          date: .enrolledOn
+        }
+      ]
     }
   ],
-  semester_stats: [
-    .[] | .courseEnrollments[] | {semester, year}
-  ] | group_by(.semester) | map({
-    semester: .[0].semester,
-    count: length,
-    years: map(.year) | unique | sort
-  })
+  program_stats: [
+    ."@graph"[] | 
+    select(."@type" == "ex:Program") | {
+      program: .programName,
+      duration: .duration,
+      student_count: (
+        ."@graph"[] | 
+        select(."@type" == "ex:Student" and .enrolledIn == ."@id") | 
+        length
+      )
+    }
+  ]
 }

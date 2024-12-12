@@ -1,10 +1,14 @@
-.departments[] | select(.teachers[].teaches | length > 1) | {
-  department: .name,
-  teachers: [
-    .teachers[] | select(.teaches | length > 1) | {
-      name: .teacherName,
-      courses: .teaches | length,
-      avg_rating: (.teaches | map(.rating) | add / length)
-    }
-  ]
+.departments[] as $dept | {
+  department: $dept.name,
+  avg_popularity: ($dept.courses | map(.popularity) | add / length),
+  courses: $dept.courses[] | {
+    title: .title,
+    popularity: .popularity,
+    relative_to_avg: (
+      if .popularity > ($dept.courses | map(.popularity) | add / length) then "above"
+      elif .popularity < ($dept.courses | map(.popularity) | add / length) then "below"
+      else "equal"
+      end
+    )
+  }
 }

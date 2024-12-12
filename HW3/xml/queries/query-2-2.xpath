@@ -1,5 +1,3 @@
-(: Description: Find all enrollments in the Fall semester where the enrollment year 
-   is greater than the student's program enrollment year.
-   Shows complex date comparison and multi-level navigation. :)
-//ex:enrollment[@semester='Fall' and @year > 
-    ancestor::ex:student/ex:programEnrollment/@year]/ancestor::ex:student/ex:name
+(: Description: Find all students who started a course in the same year they enrolled in their program. :)
+//ex:student[.//ex:enrollment
+    [substring(ex:enrolledOn, 1, 4) = .//ex:program/@year]]/ex:name

@@ -1,65 +1,131 @@
-PREFIX ex: <http://example.org/vocabulary/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-ex:enrollment1  rdf:type  ex:Enrollment;
-        ex:completedOn  "2021-01-01"^^xsd:date;
-        ex:course       ex:course1;
-        ex:enrolledOn   "2020-09-01"^^xsd:date;
-        ex:grade        2;
-        ex:semester     "Fall"@en;
-        ex:year         2020 .
-
-ex:enrollment2  rdf:type  ex:Enrollment;
-        ex:completedOn  "2021-01-01"^^xsd:date;
-        ex:course       ex:course2;
-        ex:enrolledOn   "2020-09-01"^^xsd:date;
-        ex:grade        1;
-        ex:semester     "Spring"@en;
-        ex:year         2021 .
-
-ex:enrollment3  rdf:type  ex:Enrollment;
-        ex:completedOn  "2021-01-01"^^xsd:date;
-        ex:course       ex:course3;
-        ex:enrolledOn   "2020-09-01"^^xsd:date;
-        ex:grade        3;
-        ex:semester     "Fall"@en;
-        ex:year         2021 .
-
-ex:program1  rdf:type  ex:Program;
-        ex:duration  4;
-        ex:name      "Computer Science"@en .
-
-ex:program2  rdf:type  ex:Program;
-        ex:duration  2;
-        ex:name      "Data Science"@en .
-
-ex:program3  rdf:type  ex:Program;
-        ex:duration  3;
-        ex:name      "Mathematics"@en .
-
-ex:student1  rdf:type   ex:Student;
-        ex:enrolledIn   ex:program1;
-        ex:hasEmail     <mailto:student1@b.cz>;
-        ex:hasEnrolled  ex:enrollment1;
-        ex:hasPhone     <tel:+123456789>;
-        ex:id           1;
-        foaf:name       "Alice"@en .
-
-ex:student2  rdf:type   ex:Student;
-        ex:enrolledIn   ex:program2;
-        ex:hasEmail     <mailto:bob@b.cz>;
-        ex:hasEnrolled  ex:enrollment2;
-        ex:hasPhone     <tel:+987654321>;
-        ex:id           2;
-        foaf:name       "Bob"@en .
-
-ex:student3  rdf:type   ex:Student;
-        ex:enrolledIn   ex:program3;
-        ex:hasEmail     <mailto:Charlie@a.cz>;
-        ex:hasEnrolled  ex:enrollment3;
-        ex:hasPhone     <tel:+123456789>;
-        ex:id           3;
-        foaf:name       "Charlie"@en .
+{
+    "@context": {
+        "ex": "http://example.org/vocabulary/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "name": {
+            "@id": "foaf:name",
+            "@language": "en"
+        },
+         "programName": {
+                        "@id": "ex:name",
+                        "@language": "en"
+                    },
+        "id": {
+            "@id": "ex:id",
+            "@type": "xsd:integer"
+        },
+        "duration": {
+            "@id": "ex:duration",
+            "@type": "xsd:integer"
+        },
+        "grade": {
+            "@id": "ex:grade",
+            "@type": "xsd:integer"
+        },
+         "enrolledOn": {
+            "@id": "ex:enrolledOn",
+            "@type": "xsd:date"
+        },
+        "completedOn": {
+            "@id": "ex:completedOn",
+            "@type": "xsd:date"
+        },
+        "hasEmail": {
+            "@id": "ex:hasEmail",
+            "@type": "@id"
+        },
+        "hasPhone": {
+            "@id": "ex:hasPhone",
+            "@type": "@id"
+        },
+        "enrolledIn": {
+            "@id": "ex:enrolledIn",
+            "@type": "@id"
+        },
+         "hasEnrolled": {
+            "@id": "ex:hasEnrolled",
+            "@type": "@id"
+         },
+         "course": {
+             "@id": "ex:course",
+             "@type": "@id"
+         }
+    },
+    "@graph": [
+         {
+            "@id": "ex:program1",
+            "@type": "ex:Program",
+            "programName": "Computer Science",
+             "duration": 4
+         },
+        {
+            "@id": "ex:program2",
+            "@type": "ex:Program",
+            "programName": "Data Science",
+            "duration": 2
+        },
+         {
+            "@id": "ex:program3",
+            "@type": "ex:Program",
+            "programName": "Mathematics",
+            "duration": 3
+         },
+        {
+            "@id": "ex:student1",
+            "@type": "ex:Student",
+            "id": 1,
+            "name": "Alice",
+            "hasEmail": "mailto:student1@b.cz",
+            "hasPhone": "tel:+123456789",
+            "enrolledIn": "ex:program1",
+             "hasEnrolled": "ex:enrollment1"
+        },
+        {
+            "@id": "ex:student2",
+            "@type": "ex:Student",
+            "id": 2,
+            "name": "Bob",
+            "hasEmail": "mailto:bob@b.cz",
+             "hasPhone": "tel:+987654321",
+            "enrolledIn": "ex:program2",
+            "hasEnrolled": "ex:enrollment2"
+         },
+        {
+            "@id": "ex:student3",
+            "@type": "ex:Student",
+            "id": 3,
+            "name": "Charlie",
+            "hasEmail": "mailto:Charlie@a.cz",
+             "hasPhone": "tel:+123456789",
+            "enrolledIn": "ex:program3",
+            "hasEnrolled": "ex:enrollment3"
+        },
+         {
+            "@id": "ex:enrollment1",
+            "@type": "ex:Enrollment",
+            "grade": 2,
+            "enrolledOn": "2020-09-01",
+            "completedOn": "2021-01-01",
+             "course": "ex:course1"
+         },
+       {
+            "@id": "ex:enrollment2",
+            "@type": "ex:Enrollment",
+            "grade": 1,
+            "enrolledOn": "2020-09-01",
+            "completedOn": "2021-01-01",
+             "course": "ex:course2"
+        },
+        {
+            "@id": "ex:enrollment3",
+            "@type": "ex:Enrollment",
+            "grade": 3,
+            "enrolledOn": "2020-09-01",
+            "completedOn": "2021-01-01",
+            "course": "ex:course3"
+        }
+    ]
+}

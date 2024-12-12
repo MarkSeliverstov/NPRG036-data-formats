@@ -46,7 +46,6 @@
             <xs:element name="code" type="ex:CourseCodeType"/>
             <xs:element name="title" type="ex:localizedString"/>
             <xs:element name="credits" type="ex:CreditsType"/>
-            <xs:element name="popularity" type="xs:integer"/>
         </xs:sequence>
         <xs:attribute name="id" type="ex:CourseIDType" use="required"/>
     </xs:complexType>

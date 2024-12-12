@@ -9,74 +9,98 @@
         "@graph": {
             "type": "array",
             "items": {
-                "type": "object",
-                "required": ["@id", "@type"],
-                "properties": {
-                    "@id": {
-                        "type": "string",
-                        "pattern": "^ex:(student|program|enrollment)[0-9]+$"
-                    },
-                    "@type": {
-                        "type": "string",
-                        "enum": ["ex:Student", "ex:Program", "ex:Enrollment"]
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "hasEmail": {
-                        "type": "string",
-                        "pattern": "^mailto:.+@.+\\..+$"
-                    },
-                    "hasPhone": {
-                        "type": "string",
-                        "pattern": "^tel:\\+[0-9]+$"
-                    },
-                    "enrolledIn": {
-                        "type": "string",
-                        "pattern": "^ex:program[0-9]+$"
-                    },
-                    "hasEnrolled": {
-                        "type": "string",
-                        "pattern": "^ex:enrollment[0-9]+$"
-                    },
-                    "programName": {
-                        "type": "string"
-                    },
-                    "duration": {
-                        "type": "integer",
-                        "minimum": 1,
-                        "maximum": 6
-                    },
-                    "grade": {
-                        "type": "integer",
-                        "minimum": 1,
-                        "maximum": 5
-                    },
-                    "enrolledOn": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "completedOn": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "semester": {
-                        "type": "string",
-                        "enum": ["Fall", "Spring"]
-                    },
-                    "year": {
-                        "type": "integer",
-                        "minimum": 2000
-                    },
-                    "course": {
-                        "type": "string",
-                        "pattern": "^ex:course[0-9]+$"
-                    }
-                }
-            }
-        }
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "required": ["@id", "@type"],
+                         "properties": {
+                                "@id": {
+                                    "type": "string",
+                                    "pattern": "^ex:(program)[0-9]+$"
+                                },
+                                "@type": {
+                                    "type": "string",
+                                    "enum": ["ex:Program"]
+                                },
+                                 "programName": {
+                                    "type": "string"
+                                },
+                                 "duration": {
+                                      "type": "integer",
+                                       "minimum": 1,
+                                        "maximum": 6
+                                     }
+                             }
+                     },
+                     {
+                         "type": "object",
+                         "required": ["@id", "@type"],
+                         "properties": {
+                                 "@id": {
+                                    "type": "string",
+                                    "pattern": "^ex:(student)[0-9]+$"
+                                },
+                                "@type": {
+                                    "type": "string",
+                                    "enum": ["ex:Student"]
+                                },
+                                 "id": {
+                                    "type": "integer"
+                                 },
+                                  "name": {
+                                     "type": "string"
+                                  },
+                                 "hasEmail": {
+                                    "type": "string",
+                                     "pattern": "^mailto:.+@.+\\..+$"
+                                 },
+                                 "hasPhone": {
+                                    "type": "string",
+                                    "pattern": "^tel:\\+[0-9]+$"
+                                 },
+                                "enrolledIn": {
+                                     "type": "string",
+                                     "pattern": "^ex:program[0-9]+$"
+                                },
+                                 "hasEnrolled": {
+                                   "type": "string",
+                                    "pattern": "^ex:enrollment[0-9]+$"
+                                 }
+                          }
+                     },
+                     {
+                         "type": "object",
+                          "required": ["@id", "@type"],
+                          "properties": {
+                               "@id": {
+                                   "type": "string",
+                                   "pattern": "^ex:(enrollment)[0-9]+$"
+                                },
+                                "@type": {
+                                  "type": "string",
+                                  "enum": ["ex:Enrollment"]
+                                },
+                                 "grade": {
+                                   "type": "integer",
+                                   "minimum": 1,
+                                   "maximum": 5
+                                },
+                               "enrolledOn": {
+                                 "type": "string",
+                                  "format": "date"
+                                  },
+                              "completedOn": {
+                                     "type": "string",
+                                    "format": "date"
+                                 },
+                              "course": {
+                                 "type": "string",
+                                   "pattern": "^ex:course[0-9]+$"
+                                }
+                             }
+                     }
+                  ]
+               }
+          }
+     }
     }
-}

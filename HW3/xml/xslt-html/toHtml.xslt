@@ -20,17 +20,15 @@
             <body>
                 <h1>University Information System</h1>
                 
-                <!-- Departments Section -->
+                <!-- Programs Section -->
                 <div class="section">
-                    <h2>Departments and Courses</h2>
+                    <h2>Programs</h2>
                     <table>
                         <tr>
-                            <th>Department</th>
-                            <th>Location</th>
-                            <th>Courses</th>
-                            <th>Teachers</th>
+                            <th>Program Name</th>
+                            <th>Duration (years)</th>
                         </tr>
-                        <xsl:apply-templates select="//ex:department"/>
+                        <xsl:apply-templates select="//ex:program"/>
                     </table>
                 </div>
 
@@ -42,6 +40,7 @@
                             <th>Student</th>
                             <th>Program</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>Enrollments</th>
                         </tr>
                         <xsl:apply-templates select="//ex:student"/>
@@ -51,38 +50,11 @@
         </html>
     </xsl:template>
 
-    <!-- Department Template -->
-    <xsl:template match="ex:department">
+    <!-- Program Template -->
+    <xsl:template match="ex:program">
         <tr>
             <td><xsl:value-of select="ex:name"/></td>
-            <td><xsl:value-of select="ex:location"/></td>
-            <td>
-                <ul>
-                    <xsl:for-each select="ex:courses/ex:course">
-                        <li>
-                            <xsl:value-of select="concat(ex:code, ' - ', ex:title, 
-                                                ' (', ex:credits, ' credits)')"/>
-                        </li>
-                    </xsl:for-each>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <xsl:for-each select="ex:teachers/ex:teacher">
-                        <li>
-                            <xsl:value-of select="concat(ex:name, ' (', ex:email, ')')"/>
-                            <ul>
-                                <xsl:for-each select="ex:teaches">
-                                    <li>
-                                        <xsl:value-of select="concat('Course Ref: ', @courseRef, 
-                                                            ', Rating: ', @rating)"/>
-                                    </li>
-                                </xsl:for-each>
-                            </ul>
-                        </li>
-                    </xsl:for-each>
-                </ul>
-            </td>
+            <td><xsl:value-of select="ex:duration"/></td>
         </tr>
     </xsl:template>
 
@@ -91,22 +63,18 @@
         <tr>
             <td><xsl:value-of select="ex:name"/></td>
             <td>
-                <xsl:value-of select="concat(
-                    ex:programEnrollment/ex:program/ex:name,
-                    ' (Started: ',
-                    ex:programEnrollment/@year,
-                    ')')"/>
+                <xsl:value-of select="//ex:program[@id=current()/@programRef]/ex:name"/>
             </td>
             <td><xsl:value-of select="ex:email"/></td>
+            <td><xsl:value-of select="ex:phone"/></td>
             <td>
                 <ul>
                     <xsl:for-each select="ex:courseEnrollments/ex:enrollment">
                         <li>
-                            <xsl:value-of select="concat(
-                                'Course: ', @courseRef,
-                                ', Grade: ', ex:grade,
-                                ', ', @semester,
-                                ' ', @year)"/>
+                            Course: <xsl:value-of select="@courseRef"/>
+                            Grade: <xsl:value-of select="ex:grade"/>
+                            (<xsl:value-of select="ex:enrolledOn"/> - 
+                            <xsl:value-of select="ex:completedOn"/>)
                         </li>
                     </xsl:for-each>
                 </ul>

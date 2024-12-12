@@ -1,4 +1,6 @@
 (: Description: Calculate the average duration of programs that have students enrolled 
    in courses with grades better than 2.
-   Demonstrates aggregate functions with complex filtering. :)
-avg(//ex:student[.//ex:enrollment/ex:grade < 2]/ex:programEnrollment/ex:program/ex:duration)
+   Demonstrates aggregate functions with referential integrity. :)
+avg(//ex:program
+    [@id = //ex:student[.//ex:enrollment/ex:grade < 2]/@programRef]
+    /ex:duration)

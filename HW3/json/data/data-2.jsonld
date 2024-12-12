@@ -9,10 +9,10 @@
             "@id": "foaf:name",
             "@language": "en"
         },
-        "programName": {
-            "@id": "ex:name",
-            "@language": "en"
-        },
+         "programName": {
+                        "@id": "ex:name",
+                        "@language": "en"
+                    },
         "id": {
             "@id": "ex:id",
             "@type": "xsd:integer"
@@ -25,15 +25,7 @@
             "@id": "ex:grade",
             "@type": "xsd:integer"
         },
-        "semester": {
-            "@id": "ex:semester",
-            "@language": "en"
-        },
-        "year": {
-            "@id": "ex:year",
-            "@type": "xsd:integer"
-        },
-        "enrolledOn": {
+         "enrolledOn": {
             "@id": "ex:enrolledOn",
             "@type": "xsd:date"
         },
@@ -53,16 +45,34 @@
             "@id": "ex:enrolledIn",
             "@type": "@id"
         },
-        "hasEnrolled": {
+         "hasEnrolled": {
             "@id": "ex:hasEnrolled",
             "@type": "@id"
-        },
-        "course": {
-            "@id": "ex:course",
-            "@type": "@id"
-        }
+         },
+         "course": {
+             "@id": "ex:course",
+             "@type": "@id"
+         }
     },
     "@graph": [
+         {
+            "@id": "ex:program1",
+            "@type": "ex:Program",
+            "programName": "Computer Science",
+             "duration": 4
+         },
+        {
+            "@id": "ex:program2",
+            "@type": "ex:Program",
+            "programName": "Data Science",
+            "duration": 2
+        },
+         {
+            "@id": "ex:program3",
+            "@type": "ex:Program",
+            "programName": "Mathematics",
+            "duration": 3
+         },
         {
             "@id": "ex:student1",
             "@type": "ex:Student",
@@ -71,23 +81,7 @@
             "hasEmail": "mailto:student1@b.cz",
             "hasPhone": "tel:+123456789",
             "enrolledIn": "ex:program1",
-            "hasEnrolled": "ex:enrollment1"
-        },
-        {
-            "@id": "ex:program1",
-            "@type": "ex:Program",
-            "programName": "Computer Science",
-            "duration": 4
-        },
-        {
-            "@id": "ex:enrollment1",
-            "@type": "ex:Enrollment",
-            "grade": 2,
-            "enrolledOn": "2020-09-01",
-            "completedOn": "2021-01-01",
-            "semester": "Fall",
-            "year": 2020,
-            "course": "ex:course1"
+             "hasEnrolled": "ex:enrollment1"
         },
         {
             "@id": "ex:student2",
@@ -95,41 +89,35 @@
             "id": 2,
             "name": "Bob",
             "hasEmail": "mailto:bob@b.cz",
-            "hasPhone": "tel:+987654321",
+             "hasPhone": "tel:+987654321",
             "enrolledIn": "ex:program2",
             "hasEnrolled": "ex:enrollment2"
-        },
-        {
-            "@id": "ex:program2",
-            "@type": "ex:Program",
-            "programName": "Data Science",
-            "duration": 2
-        },
-        {
-            "@id": "ex:enrollment2",
-            "@type": "ex:Enrollment",
-            "grade": 1,
-            "enrolledOn": "2020-09-01",
-            "completedOn": "2021-01-01",
-            "semester": "Spring",
-            "year": 2021,
-            "course": "ex:course2"
-        },
+         },
         {
             "@id": "ex:student3",
             "@type": "ex:Student",
             "id": 3,
             "name": "Charlie",
             "hasEmail": "mailto:Charlie@a.cz",
-            "hasPhone": "tel:+123456789",
+             "hasPhone": "tel:+123456789",
             "enrolledIn": "ex:program3",
             "hasEnrolled": "ex:enrollment3"
         },
-        {
-            "@id": "ex:program3",
-            "@type": "ex:Program",
-            "programName": "Mathematics",
-            "duration": 3
+         {
+            "@id": "ex:enrollment1",
+            "@type": "ex:Enrollment",
+            "grade": 2,
+            "enrolledOn": "2020-09-01",
+            "completedOn": "2021-01-01",
+             "course": "ex:course1"
+         },
+       {
+            "@id": "ex:enrollment2",
+            "@type": "ex:Enrollment",
+            "grade": 1,
+            "enrolledOn": "2020-09-01",
+            "completedOn": "2021-01-01",
+             "course": "ex:course2"
         },
         {
             "@id": "ex:enrollment3",
@@ -137,8 +125,6 @@
             "grade": 3,
             "enrolledOn": "2020-09-01",
             "completedOn": "2021-01-01",
-            "semester": "Fall",
-            "year": 2021,
             "course": "ex:course3"
         }
     ]

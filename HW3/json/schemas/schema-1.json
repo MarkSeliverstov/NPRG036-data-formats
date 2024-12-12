@@ -9,102 +9,112 @@
         "@graph": {
             "type": "array",
             "items": {
-                "type": "object",
-                "required": ["@id", "@type"],
-                "properties": {
-                    "@id": {
-                        "type": "string",
-                        "pattern": "^ex:(dept|teacher|course)[0-9]+$"
-                    },
-                    "@type": {
-                        "type": "string",
-                        "enum": ["ex:Department", "ex:Teacher", "ex:Course", "ex:Teaching"]
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "location": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "teacherName": {
-                        "type": "string"
-                    },
-                    "hasEmail": {
-                        "type": "string",
-                        "pattern": "^mailto:.+@.+\\..+$"
-                    },
-                    "hasPhone": {
-                        "type": "string",
-                        "pattern": "^tel:\\+[0-9]+$"
-                    },
-                    "teaches": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "required": ["@type", "course", "rating"],
-                            "properties": {
-                                "@type": {
-                                    "type": "string",
-                                    "enum": ["ex:Teaching"]
-                                },
-                                "course": {
-                                    "type": "object",
-                                    "required": ["@id"],
-                                    "properties": {
-                                        "@id": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "required": ["@id", "@type", "name", "location"],
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "pattern": "^ex:dept[0-9]+$"
+                            },
+                            "@type": {
+                                "type": "string",
+                                "enum": ["ex:Department"]
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "location": {
+                                "type": "string"
+                            },
+                            "offers": {
+                                "type": "string",
+                                "pattern": "^ex:course[0-9]+$"
+                            },
+                            "hasTeacher": {
+                                "oneOf": [
+                                    {
+                                        "type": "string",
+                                        "pattern": "^ex:teacher[0-9]+$"
+                                    },
+                                    {
+                                        "type": "array",
+                                        "items": {
                                             "type": "string",
-                                            "pattern": "^ex:course[0-9]+$"
+                                            "pattern": "^ex:teacher[0-9]+$"
                                         }
                                     }
-                                },
-                                "rating": {
-                                    "type": "number",
-                                    "minimum": 0,
-                                    "maximum": 5
-                                }
+                                ]
                             }
                         }
                     },
-                    "belongsTo": {
-                        "type": "string",
-                        "pattern": "^ex:dept[0-9]+$"
+                    {
+                        "type": "object",
+                        "required": ["@id", "@type", "id", "teacherName", "hasEmail", "hasPhone", "teaches", "belongsTo"],
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "pattern": "^ex:teacher[0-9]+$"
+                            },
+                            "@type": {
+                                "type": "string",
+                                "enum": ["ex:Teacher"]
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "teacherName": {
+                                "type": "string"
+                            },
+                            "hasEmail": {
+                                "type": "string",
+                                "pattern": "^mailto:.+@.+\\..+$"
+                            },
+                            "hasPhone": {
+                                "type": "string",
+                                "pattern": "^tel:\\+[0-9]+$"
+                            },
+                            "teaches": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "pattern": "^ex:course[0-9]+$"
+                                }
+                            },
+                            "belongsTo": {
+                                "type": "string",
+                                "pattern": "^ex:dept[0-9]+$"
+                            }
+                        }
                     },
-                    "offers": {
-                        "type": ["string", "array"],
-                        "items": {
-                            "type": "string",
-                            "pattern": "^ex:course[0-9]+$"
-                        },
-                        "pattern": "^ex:course[0-9]+$"
-                    },
-                    "hasTeacher": {
-                        "type": ["string", "array"],
-                        "items": {
-                            "type": "string",
-                            "pattern": "^ex:teacher[0-9]+$"
-                        },
-                        "pattern": "^ex:teacher[0-9]+$"
-                    },
-                    "code": {
-                        "type": "string",
-                        "pattern": "^CS[0-9]{3}$"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "credits": {
-                        "type": "integer",
-                        "minimum": 1
-                    },
-                    "popularity": {
-                        "type": "integer",
-                        "minimum": 0,
-                        "maximum": 100
+                    {
+                        "type": "object",
+                        "required": ["@id", "@type", "code", "title", "credits"],
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "pattern": "^ex:course[0-9]+$"
+                            },
+                            "@type": {
+                                "type": "string",
+                                "enum": ["ex:Course"]
+                            },
+                            "code": {
+                                "type": "string",
+                                "pattern": "^CS[0-9]{3}$"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "credits": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 10
+                            }
+                        }
                     }
-                }
+                ]
             }
         }
     }

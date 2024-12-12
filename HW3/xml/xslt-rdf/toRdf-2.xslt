@@ -24,20 +24,31 @@
 
     <!-- Student template -->
     <xsl:template match="ex:student">
-        <xsl:text>ex:student</xsl:text><xsl:value-of select="substring-after(@id, 'student')"/>
+        <xsl:text>ex:student</xsl:text><xsl:value-of select="substring-after(@id, 's')"/>
         <xsl:text> a ex:Student ;&#xa;</xsl:text>
-        <xsl:text>    ex:id "</xsl:text><xsl:value-of select="substring-after(@id, 'student')"/><xsl:text>"^^xsd:integer ;&#xa;</xsl:text>
+        <xsl:text>    ex:id "</xsl:text><xsl:value-of select="substring-after(@id, 's')"/><xsl:text>"^^xsd:integer ;&#xa;</xsl:text>
         <xsl:text>    foaf:name "</xsl:text><xsl:value-of select="ex:name"/><xsl:text>"@en ;&#xa;</xsl:text>
-        <xsl:text>    ex:hasEmail &lt;mailto:</xsl:text><xsl:value-of select="ex:email"/><xsl:text>&gt; ;&#xa;</xsl:text>
-        <xsl:text>    ex:hasPhone &lt;tel:</xsl:text><xsl:value-of select="ex:phone"/><xsl:text>&gt; ;&#xa;</xsl:text>
-        <xsl:text>    ex:enrolledIn ex:program</xsl:text>
-        <xsl:value-of select="substring-after(ex:programEnrollment/ex:program/@id, 'program')"/>
+        <xsl:text>    ex:hasEmail &lt;mailto:</xsl:text><xsl:value-of select="ex:email"/><xsl:text>&gt;</xsl:text>
+        
+        <!-- Handle phone numbers -->
+        <xsl:if test="ex:phone">
+            <xsl:for-each select="ex:phone">
+                <xsl:if test="normalize-space(.) != ''">
+                    <xsl:text> ;&#xa;    ex:hasPhone &lt;tel:</xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text>&gt;</xsl:text>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:if>
+        
+        <xsl:text> ;&#xa;    ex:enrolledIn ex:program</xsl:text>
+        <xsl:value-of select="substring-after(@programRef, 'p')"/>
         <xsl:text> .&#xa;&#xa;</xsl:text>
     </xsl:template>
 
     <!-- Program template -->
     <xsl:template match="ex:program">
-        <xsl:text>ex:program</xsl:text><xsl:value-of select="substring-after(@id, 'program')"/>
+        <xsl:text>ex:program</xsl:text><xsl:value-of select="substring-after(@id, 'p')"/>
         <xsl:text> a ex:Program ;&#xa;</xsl:text>
         <xsl:text>    ex:name "</xsl:text><xsl:value-of select="ex:name"/><xsl:text>"@en ;&#xa;</xsl:text>
         <xsl:text>    ex:duration "</xsl:text><xsl:value-of select="ex:duration"/><xsl:text>"^^xsd:integer .&#xa;&#xa;</xsl:text>
@@ -45,22 +56,20 @@
 
     <!-- Enrollment template -->
     <xsl:template match="ex:enrollment">
-        <xsl:text>ex:enrollment</xsl:text><xsl:value-of select="substring-after(@id, 'enroll')"/>
+        <xsl:text>ex:enrollment</xsl:text><xsl:value-of select="substring-after(@id, 'e')"/>
         <xsl:text> a ex:Enrollment ;&#xa;</xsl:text>
         <xsl:text>    ex:grade "</xsl:text><xsl:value-of select="ex:grade"/><xsl:text>"^^xsd:integer ;&#xa;</xsl:text>
         <xsl:text>    ex:enrolledOn "</xsl:text><xsl:value-of select="ex:enrolledOn"/><xsl:text>"^^xsd:date ;&#xa;</xsl:text>
         <xsl:text>    ex:completedOn "</xsl:text><xsl:value-of select="ex:completedOn"/><xsl:text>"^^xsd:date ;&#xa;</xsl:text>
-        <xsl:text>    ex:semester "</xsl:text><xsl:value-of select="@semester"/><xsl:text>"@en ;&#xa;</xsl:text>
-        <xsl:text>    ex:year "</xsl:text><xsl:value-of select="@year"/><xsl:text>"^^xsd:integer ;&#xa;</xsl:text>
         <xsl:text>    ex:course ex:course</xsl:text>
-        <xsl:value-of select="substring-after(@courseRef, 'course')"/>
+        <xsl:value-of select="substring-after(@courseRef, 'c')"/>
         <xsl:text> .&#xa;&#xa;</xsl:text>
 
         <!-- hasEnrolled relationship -->
         <xsl:text>ex:student</xsl:text>
-        <xsl:value-of select="substring-after(ancestor::ex:student/@id, 'student')"/>
+        <xsl:value-of select="substring-after(ancestor::ex:student/@id, 's')"/>
         <xsl:text> ex:hasEnrolled ex:enrollment</xsl:text>
-        <xsl:value-of select="substring-after(@id, 'enroll')"/>
+        <xsl:value-of select="substring-after(@id, 'e')"/>
         <xsl:text> .&#xa;&#xa;</xsl:text>
     </xsl:template>
 

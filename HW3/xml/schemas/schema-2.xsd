@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:ex="http://example.org/vocabulary/"
            xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -5,8 +6,8 @@
            elementFormDefault="qualified">
 
     <!-- Import XML namespace -->
-    <xs:import namespace="http://www.w3.org/XML/1998/namespace" 
-              schemaLocation="https://www.w3.org/2001/03/xml.xsd"/>
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+               schemaLocation="https://www.w3.org/2001/03/xml.xsd"/>
 
     <!-- Define a complex type for elements that need xml:lang -->
     <xs:complexType name="localizedString">
@@ -22,11 +23,11 @@
         <xs:sequence>
             <xs:element name="name" type="ex:localizedString"/>
             <xs:element name="email" type="ex:EmailType"/>
-            <xs:element name="phone" type="ex:PhoneType" maxOccurs="unbounded"/>
-            <xs:element name="programEnrollment" type="ex:ProgramEnrollmentType"/>
+            <xs:element name="phone" type="ex:PhoneType" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="courseEnrollments" type="ex:CourseEnrollmentsListType"/>
         </xs:sequence>
         <xs:attribute name="id" type="ex:StudentIDType" use="required"/>
+        <xs:attribute name="programRef" type="ex:ProgramRefType" use="required"/>
     </xs:complexType>
 
     <!-- Program Type -->
@@ -36,14 +37,6 @@
             <xs:element name="duration" type="ex:ProgramDurationType"/>
         </xs:sequence>
         <xs:attribute name="id" type="ex:ProgramIDType" use="required"/>
-    </xs:complexType>
-
-    <!-- Program Enrollment Type -->
-    <xs:complexType name="ProgramEnrollmentType">
-        <xs:sequence>
-            <xs:element name="program" type="ex:ProgramType"/>
-        </xs:sequence>
-        <xs:attribute name="year" type="ex:EnrollmentYearType" use="required"/>
     </xs:complexType>
 
     <!-- Course Enrollments List Type -->
@@ -62,8 +55,6 @@
         </xs:sequence>
         <xs:attribute name="id" type="ex:EnrollmentIDType" use="required"/>
         <xs:attribute name="courseRef" type="ex:CourseRefType" use="required"/>
-        <xs:attribute name="semester" type="ex:SemesterType" use="required"/>
-        <xs:attribute name="year" type="ex:EnrollmentYearType" use="required"/>
     </xs:complexType>
 
     <!-- Simple Types -->
@@ -75,6 +66,11 @@
 
     <xs:simpleType name="ProgramIDType">
         <xs:restriction base="xs:ID">
+            <xs:pattern value="p[0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProgramRefType">
+        <xs:restriction base="xs:IDREF">
             <xs:pattern value="p[0-9]+"/>
         </xs:restriction>
     </xs:simpleType>
@@ -117,36 +113,23 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="SemesterType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Fall"/>
-            <xs:enumeration value="Spring"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnrollmentYearType">
-        <xs:restriction base="xs:integer">
-            <xs:minInclusive value="2000"/>
-            <xs:maxInclusive value="2100"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <!-- Root Element -->
     <xs:element name="students">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="student" type="ex:StudentType" maxOccurs="unbounded"/>
+                <xs:element name="program" type="ex:ProgramType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="student" type="ex:StudentType" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
 
         <!-- Keys -->
-        <xs:key name="StudentKey">
-            <xs:selector xpath="ex:student"/>
+        <xs:key name="ProgramKey">
+            <xs:selector xpath="ex:program"/>
             <xs:field xpath="@id"/>
         </xs:key>
 
-        <xs:key name="ProgramKey">
-            <xs:selector xpath=".//ex:program"/>
+        <xs:key name="StudentKey">
+            <xs:selector xpath="ex:student"/>
             <xs:field xpath="@id"/>
         </xs:key>
 
@@ -154,5 +137,10 @@
             <xs:selector xpath=".//ex:enrollment"/>
             <xs:field xpath="@id"/>
         </xs:key>
+
+        <xs:keyref name="StudentProgramRef" refer="ex:ProgramKey">
+            <xs:selector xpath=".//ex:student"/>
+            <xs:field xpath="@programRef"/>
+        </xs:keyref>
     </xs:element>
 </xs:schema>

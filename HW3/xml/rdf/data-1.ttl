@@ -24,14 +24,7 @@ ex:teacher1 a ex:Teacher ;
     foaf:name "Dr. Smith"@en ;
     ex:hasEmail <mailto:smith@b.cz> ;
     ex:hasPhone <tel:+77777777> ;
-    ex:teaches [
-        ex:course ex:course1 ;
-        ex:rating "4.5"^^xsd:decimal
-    ] ;
-    ex:teaches [
-        ex:course ex:course2 ;
-        ex:rating "4.7"^^xsd:decimal
-    ] ;
+    ex:teaches ex:course1 , ex:course2 ;
     ex:belongsTo ex:dept1 .
 
 ex:teacher2 a ex:Teacher ;
@@ -39,10 +32,7 @@ ex:teacher2 a ex:Teacher ;
     foaf:name "Dr. Miller"@en ;
     ex:hasEmail <mailto:Miller@b.cz> ;
     ex:hasPhone <tel:+77888777> ;
-    ex:teaches [
-        ex:course ex:course3 ;
-        ex:rating "4.2"^^xsd:decimal
-    ] ;
+    ex:teaches ex:course3 ;
     ex:belongsTo ex:dept2 .
 
 ex:teacher3 a ex:Teacher ;
@@ -50,27 +40,21 @@ ex:teacher3 a ex:Teacher ;
     foaf:name "Dr. Brown"@en ;
     ex:hasEmail <mailto:brown@a.cz> ;
     ex:hasPhone <tel:+123456789> ;
-    ex:teaches [
-        ex:course ex:course3 ;
-        ex:rating "4.0"^^xsd:decimal
-    ] ;
+    ex:teaches ex:course3 ;
     ex:belongsTo ex:dept2 .
 
 ex:course1 a ex:Course ;
     ex:code "CS101" ;
     ex:title "Introduction to Computer Science"@en ;
-    ex:credits "4"^^xsd:integer ;
-    ex:popularity "95"^^xsd:integer .
+    ex:credits "4"^^xsd:integer .
 
 ex:course3 a ex:Course ;
     ex:code "CS103" ;
     ex:title "Algorithms"@en ;
-    ex:credits "4"^^xsd:integer ;
-    ex:popularity "85"^^xsd:integer .
+    ex:credits "4"^^xsd:integer .
 
 ex:course2 a ex:Course ;
     ex:code "CS102" ;
     ex:title "Data Structures"@en ;
-    ex:credits "3"^^xsd:integer ;
-    ex:popularity "78"^^xsd:integer .
+    ex:credits "3"^^xsd:integer .
 
