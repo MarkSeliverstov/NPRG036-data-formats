@@ -1,4 +1,4 @@
-id,name,hasEmail,hasPhone,department_id
-1,Dr. Smith,smith@b.cz,+77777777,1
-2,Dr. Miller,Miller@b.cz,+77888777,2
-3,Dr. Brown,brown@a.cz,+123456789,2
+id,name,hasEmail,department_id
+1,Dr. Smith,smith@b.cz,1
+2,Dr. Miller,Miller@b.cz,2
+3,Dr. Brown,brown@a.cz,2

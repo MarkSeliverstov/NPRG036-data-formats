@@ -1,4 +1,4 @@
-id,name,hasEmail,hasPhone,program_id,enrollment_id
-1,Alice,student1@b.cz,+123456789;+987654321,1,1
-2,Bob,bob@b.cz,,2,2
-3,Charlie,Charlie@a.cz,+22224444,3,3
+id,name,hasEmail,program_id,enrollment_id
+1,Alice,student1@b.cz,1,1
+2,Bob,bob@b.cz,2,2
+3,Charlie,Charlie@a.cz,3,3

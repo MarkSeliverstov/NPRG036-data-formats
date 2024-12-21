@@ -8,8 +8,8 @@
   ex:enrolledIn :program1;
   ex:hasEmail "student1@b.cz";
   ex:hasEnrolled :enrollment1;
-  ex:hasPhone "+123456789",
-    "+987654321";
+  ex:hasPhone <tel:+123456789>,
+    <tel:+987654321>;
   foaf:name "Alice"@cs .
 
 :student2 a ex:Student;
@@ -22,13 +22,13 @@
   ex:enrolledIn :program3;
   ex:hasEmail "Charlie@a.cz";
   ex:hasEnrolled :enrollment3;
-  ex:hasPhone "+22224444";
+  ex:hasPhone <tel:+22224444>;
   foaf:name "Charlie"@cs .
 
 :teacher2 a ex:Teacher;
   ex:belongsTo :department2;
   ex:hasEmail "Miller@b.cz";
-  ex:hasPhone "+77888777";
+  ex:hasPhone <tel:+77888777>;
   foaf:name "Dr. Miller"@cs .
 
 :course1 a ex:Course;
@@ -89,13 +89,13 @@
 :teacher1 a ex:Teacher;
   ex:belongsTo :department1;
   ex:hasEmail "smith@b.cz";
-  ex:hasPhone "+77777777";
+  ex:hasPhone <tel:+77777777>;
   foaf:name "Dr. Smith"@cs .
 
 :teacher3 a ex:Teacher;
   ex:belongsTo :department2;
   ex:hasEmail "brown@a.cz";
-  ex:hasPhone "+123456789";
+  ex:hasPhone <tel:+123456789>;
   foaf:name "Dr. Brown"@cs .
 
 :department1 a ex:Department;

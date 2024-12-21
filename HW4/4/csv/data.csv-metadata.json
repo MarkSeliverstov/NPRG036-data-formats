@@ -10,6 +10,83 @@
   "@id": "http://example.org/university/data.csv-metadata.json",
   "tables": [
     {
+      "@id": "http://example.org/university/data-8.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-8.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "propertyUrl": "http://example.org/vocabulary/hasPhone",
+        "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/student{student_id}",
+        "valueUrl": "tel:{hasPhone}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "student_id",
+            "titles": "student_id",
+            "dc:description": "Unique identifier for a student.",
+            "required": true,
+            "datatype": "integer"
+          },
+          {
+            "@type": "Column",
+            "name": "hasPhone",
+            "required": true,
+            "titles": "hasPhone",
+            "dc:description": "Phone of the student.",
+            "datatype": "string"
+          }
+        ],
+        "primaryKey": ["hasPhone"],
+        "foreignKeys": [
+          {
+            "columnReference": "student_id",
+            "reference": {
+              "resource": "data-5.csv",
+              "columnReference": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "http://example.org/university/data-7.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-7.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "propertyUrl": "http://example.org/vocabulary/hasPhone",
+        "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/teacher{teacher_id}",
+        "valueUrl": "tel:{hasPhone}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "teacher_id",
+            "titles": "teacher_id",
+            "dc:description": "Unique identifier for a teacher.",
+            "required": true,
+            "datatype": "integer"
+          },
+          {
+            "@type": "Column",
+            "name": "hasPhone",
+            "titles": "hasPhone",
+            "dc:description": "Phone of the teacher.",
+            "datatype": "string"
+          }
+        ],
+        "primaryKey": "teacher_id",
+        "foreignKeys": [
+          {
+            "columnReference": "teacher_id",
+            "reference": {
+              "resource": "data-6.csv",
+              "columnReference": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
       "@id": "http://example.org/university/data-5.csv-metadata.json",
       "@type": "Table",
       "url": "data-5.csv",
@@ -43,15 +120,6 @@
             "dc:description": "Email of the student.",
             "datatype": "string",
             "propertyUrl": "http://example.org/vocabulary/hasEmail"
-          },
-          {
-            "@type": "Column",
-            "name": "hasPhone",
-            "titles": "hasPhone",
-            "dc:description": "Phone of the student.",
-            "datatype": "string",
-            "separator": ";",
-            "propertyUrl": "http://example.org/vocabulary/hasPhone"
           },
           {
             "@type": "Column",
@@ -125,15 +193,6 @@
             "dc:description": "Email of the teacher.",
             "datatype": "string",
             "propertyUrl": "http://example.org/vocabulary/hasEmail"
-          },
-          {
-            "@type": "Column",
-            "name": "hasPhone",
-            "titles": "hasPhone",
-            "dc:description": "Phone of the student.",
-            "datatype": "string",
-            "separator": ";",
-            "propertyUrl": "http://example.org/vocabulary/hasPhone"
           },
           {
             "@type": "Column",
