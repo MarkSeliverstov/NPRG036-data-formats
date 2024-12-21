@@ -1,0 +1,107 @@
+@prefix : <file:/home/mff/NPRG036-data-formats/HW4/4/csv/> .
+@prefix ex: <http://example.org/vocabulary/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:student1 a ex:Student;
+  ex:enrolledIn :program1;
+  ex:hasEmail "student1@b.cz";
+  ex:hasEnrolled :enrollment1;
+  ex:hasPhone "+123456789",
+    "+987654321";
+  foaf:name "Alice"@cs .
+
+:student2 a ex:Student;
+  ex:enrolledIn :program2;
+  ex:hasEmail "bob@b.cz";
+  ex:hasEnrolled :enrollment2;
+  foaf:name "Bob"@cs .
+
+:student3 a ex:Student;
+  ex:enrolledIn :program3;
+  ex:hasEmail "Charlie@a.cz";
+  ex:hasEnrolled :enrollment3;
+  ex:hasPhone "+22224444";
+  foaf:name "Charlie"@cs .
+
+:teacher2 a ex:Teacher;
+  ex:belongsTo :department2;
+  ex:hasEmail "Miller@b.cz";
+  ex:hasPhone "+77888777";
+  foaf:name "Dr. Miller"@cs .
+
+:course1 a ex:Course;
+  ex:code "CS101"@en;
+  ex:credits 4;
+  ex:offeredBy :department1;
+  ex:teachedBy :teacher2\,3;
+  ex:title "Introduction to Computer Science"@en .
+
+:course2 a ex:Course;
+  ex:code "CS102"@en;
+  ex:credits 3;
+  ex:offeredBy :department2;
+  ex:teachedBy :teacher1;
+  ex:title "Data Structures"@en .
+
+:course3 a ex:Course;
+  ex:code "CS103"@en;
+  ex:credits 4;
+  ex:offeredBy :department3;
+  ex:teachedBy :teacher3;
+  ex:title "Algorithms"@en .
+
+:department3 a ex:Department;
+  ex:location "Building C"@en;
+  ex:name "Physics Department"@en .
+
+:enrollment1 a ex:Enrollment;
+  ex:completedOn "2021-01-01"^^xsd:date;
+  ex:course :course1;
+  ex:enrolledOn "2020-09-01"^^xsd:date;
+  ex:grade 2 .
+
+:enrollment2 a ex:Enrollment;
+  ex:completedOn "2021-01-01"^^xsd:date;
+  ex:course :course2;
+  ex:enrolledOn "2020-09-01"^^xsd:date;
+  ex:grade 1 .
+
+:enrollment3 a ex:Enrollment;
+  ex:completedOn "2021-01-01"^^xsd:date;
+  ex:course :course3;
+  ex:enrolledOn "2020-09-01"^^xsd:date;
+  ex:grade 3 .
+
+:program1 a ex:Program;
+  ex:duration 4;
+  ex:name "Computer Science"@en .
+
+:program2 a ex:Program;
+  ex:duration 2;
+  ex:name "Data Science"@en .
+
+:program3 a ex:Program;
+  ex:duration 3;
+  ex:name "Mathematics"@en .
+
+:teacher1 a ex:Teacher;
+  ex:belongsTo :department1;
+  ex:hasEmail "smith@b.cz";
+  ex:hasPhone "+77777777";
+  foaf:name "Dr. Smith"@cs .
+
+:teacher3 a ex:Teacher;
+  ex:belongsTo :department2;
+  ex:hasEmail "brown@a.cz";
+  ex:hasPhone "+123456789";
+  foaf:name "Dr. Brown"@cs .
+
+:department1 a ex:Department;
+  ex:location "Building A"@en;
+  ex:name "Computer Science Department"@en .
+
+:department2 a ex:Department;
+  ex:location "Building B"@en;
+  ex:name "Mathematics Department"@en .

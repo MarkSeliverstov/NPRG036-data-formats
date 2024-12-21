@@ -1,0 +1,386 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    {
+      "@language": "en"
+    }
+  ],
+  "@type": "TableGroup",
+  "dc:description": "Public contracts",
+  "@id": "http://example.org/university/data.csv-metadata.json",
+  "tables": [
+    {
+      "@id": "http://example.org/university/data-5.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-5.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl": "student{+id}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "id",
+            "titles": "id",
+            "dc:description": "Unique identifier for a student.",
+            "required": true,
+            "datatype": "integer",
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Student"
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "dc:description": "Name of the student.",
+            "datatype": "string",
+            "propertyUrl": "foaf:name",
+            "lang": "cs"
+          },
+          {
+            "@type": "Column",
+            "name": "hasEmail",
+            "titles": "hasEmail",
+            "dc:description": "Email of the student.",
+            "datatype": "string",
+            "propertyUrl": "http://example.org/vocabulary/hasEmail"
+          },
+          {
+            "@type": "Column",
+            "name": "hasPhone",
+            "titles": "hasPhone",
+            "dc:description": "Phone of the student.",
+            "datatype": "string",
+            "separator": ";",
+            "propertyUrl": "http://example.org/vocabulary/hasPhone"
+          },
+          {
+            "@type": "Column",
+            "name": "program_id",
+            "titles": "program_id",
+            "dc:description": "Student program",
+            "datatype": "integer",
+            "propertyUrl": "http://example.org/vocabulary/enrolledIn",
+            "valueUrl": "program{+program_id}"
+          },
+          {
+            "@type": "Column",
+            "name": "enrollment_id",
+            "titles": "enrollment_id",
+            "dc:description": "Student Enrollments",
+            "datatype": "integer",
+            "separator": ";",
+            "propertyUrl": "http://example.org/vocabulary/hasEnrolled",
+            "valueUrl": "enrollment{+enrollment_id}"
+          }
+        ],
+        "primaryKey": "id",
+        "foreignKeys": [
+          {
+            "columnReference": "program_id",
+            "reference": {
+              "resource": "data-4.csv",
+              "columnReference": "id"
+            }
+          },
+          {
+            "columnReference": "enrollment_id",
+            "reference": {
+              "resource": "data-3.csv",
+              "columnReference": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "http://example.org/university/data-6.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-6.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl": "teacher{+id}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "id",
+            "titles": "id",
+            "dc:description": "Unique identifier for a teacher.",
+            "required": true,
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Teacher"
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "dc:description": "Name of the teacher.",
+            "datatype": "string",
+            "propertyUrl": "foaf:name",
+            "lang": "cs"
+          },
+          {
+            "@type": "Column",
+            "name": "hasEmail",
+            "titles": "hasEmail",
+            "dc:description": "Email of the teacher.",
+            "datatype": "string",
+            "propertyUrl": "http://example.org/vocabulary/hasEmail"
+          },
+          {
+            "@type": "Column",
+            "name": "hasPhone",
+            "titles": "hasPhone",
+            "dc:description": "Phone of the student.",
+            "datatype": "string",
+            "separator": ";",
+            "propertyUrl": "http://example.org/vocabulary/hasPhone"
+          },
+          {
+            "@type": "Column",
+            "name": "department_id",
+            "titles": "department_id",
+            "dc:description": "Teaches belongs to department",
+            "datatype": "integer",
+            "propertyUrl": "http://example.org/vocabulary/belongsTo",
+            "valueUrl": "department{+department_id}"
+          }
+        ],
+        "primaryKey": "id",
+        "foreignKeys": [
+          {
+            "columnReference": "department_id",
+            "reference": {
+              "resource": "data-2.csv",
+              "columnReference": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "http://example.org/university/data-1.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-1.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl": "course{+id}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "id",
+            "titles": "id",
+            "datatype": "integer",
+            "dc:description": "Unique identifier for a course.",
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Course"
+          },
+          {
+            "@type": "Column",
+            "name": "code",
+            "titles": "code",
+            "dc:description": "Course code.",
+            "datatype": "string",
+            "lang": "en",
+            "propertyUrl": "http://example.org/vocabulary/code"
+          },
+          {
+            "@type": "Column",
+            "name": "title",
+            "titles": "title",
+            "dc:description": "Title of the course.",
+            "datatype": "string",
+            "propertyUrl": "http://example.org/vocabulary/title",
+            "lang": "en"
+          },
+          {
+            "@type": "Column",
+            "name": "credits",
+            "titles": "credits",
+            "dc:description": "Credits for the course.",
+            "propertyUrl": "http://example.org/vocabulary/credits",
+            "datatype": "integer"
+          },
+          {
+            "@type": "Column",
+            "name": "department_id",
+            "titles": "department_id",
+            "dc:description": "Department that offer the course",
+            "datatype": "integer",
+            "propertyUrl": "http://example.org/vocabulary/offeredBy",
+            "valueUrl": "department{+department_id}"
+          },
+          {
+            "@type": "Column",
+            "name": "teacher_id",
+            "titles": "teacher_id",
+            "separator": ";",
+            "dc:description": "Teacher that teaches this course",
+            "datatype": "integer",
+            "propertyUrl": "http://example.org/vocabulary/teachedBy",
+            "valueUrl": "teacher{+teacher_id}"
+          }
+        ],
+        "primaryKey": "id",
+        "foreignKeys": [
+          {
+            "columnReference": "department_id",
+            "reference": {
+              "resource": "data-2.csv",
+              "columnReference": "id"
+            }
+          },
+          {
+            "columnReference": "teacher_id",
+            "reference": {
+              "resource": "data-6.csv",
+              "columnReference": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@id": "http://example.org/university/data-2.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-2.csv",
+      "tableSchema": {
+        "aboutUrl": "department{+id}",
+        "@type": "Schema",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "id",
+            "titles": "id",
+            "dc:description": "Unique identifier for a department.",
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Department"
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "dc:description": "Name of the department.",
+            "required": true,
+            "datatype": "string",
+            "propertyUrl": "http://example.org/vocabulary/name",
+            "lang": "en"
+          },
+          {
+            "@type": "Column",
+            "name": "location",
+            "titles": "location",
+            "dc:description": "Location of the department.",
+            "datatype": "string",
+            "lang": "en",
+            "propertyUrl": "http://example.org/vocabulary/location"
+          }
+        ],
+        "primaryKey": "id"
+      }
+    },
+    {
+      "@id": "http://example.org/university/data-4.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-4.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl": "program{+id}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "id",
+            "titles": "id",
+            "dc:description": "Program id",
+            "required": true,
+            "datatype": "integer",
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Program"
+          },
+          {
+            "@type": "Column",
+            "name": "name",
+            "titles": "name",
+            "dc:description": "Name of the program.",
+            "required": true,
+            "datatype": "string",
+            "lang": "en",
+            "propertyUrl": "http://example.org/vocabulary/name"
+          },
+          {
+            "@type": "Column",
+            "name": "duration",
+            "titles": "duration",
+            "dc:description": "Duration of the program in years.",
+            "datatype": "integer",
+            "propertyUrl": "http://example.org/vocabulary/duration"
+          }
+        ],
+        "primaryKey": "id"
+      }
+    },
+    {
+      "@id": "http://example.org/university/data-3.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-3.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl": "enrollment{id}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "id",
+            "titles": "id",
+            "dc:description": "Unique identifier for an enrollment.",
+            "required": true,
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Enrollment"
+          },
+          {
+            "@type": "Column",
+            "name": "course_id",
+            "titles": "course_id",
+            "dc:description": "Course enrollments",
+            "datatype": "integer",
+            "required": true,
+            "propertyUrl": "http://example.org/vocabulary/course",
+            "valueUrl": "course{+course_id}"
+          },
+          {
+            "@type": "Column",
+            "name": "grade",
+            "titles": "grade",
+            "dc:description": "Grade earned in the course.",
+            "datatype": "integer",
+            "propertyUrl": "http://example.org/vocabulary/grade"
+          },
+          {
+            "@type": "Column",
+            "name": "enrolledOn",
+            "titles": "enrolledOn",
+            "dc:description": "Date of enrollment.",
+            "datatype": "date",
+            "propertyUrl": "http://example.org/vocabulary/enrolledOn"
+          },
+          {
+            "@type": "Column",
+            "name": "completedOn",
+            "titles": "completedOn",
+            "dc:description": "Completion date",
+            "datatype": "date",
+            "propertyUrl": "http://example.org/vocabulary/completedOn"
+          }
+        ],
+        "primaryKey": "id",
+        "foreignKeys": [
+          {
+            "columnReference": "course_id",
+            "reference": {
+              "resource": "data-1.csv",
+              "columnReference": "id"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
