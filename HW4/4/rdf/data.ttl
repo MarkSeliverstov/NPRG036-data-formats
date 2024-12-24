@@ -11,7 +11,7 @@
 
 :student1 a ex:Student;
   ex:enrolledIn :program1;
-  ex:hasEmail "student1@b.cz";
+  ex:hasEmail <mailto:student1@b.cz>;
   ex:hasEnrolled :enrollment1;
   ex:hasPhone <tel:+123456789>,
     <tel:+987654321>;
@@ -19,22 +19,38 @@
 
 :student2 a ex:Student;
   ex:enrolledIn :program2;
-  ex:hasEmail "bob@b.cz";
+  ex:hasEmail <mailto:bob@b.cz>;
   ex:hasEnrolled :enrollment2;
   foaf:name "Bob"@cs .
 
 :student3 a ex:Student;
   ex:enrolledIn :program3;
-  ex:hasEmail "Charlie@a.cz";
+  ex:hasEmail <mailto:Charlie@a.cz>;
   ex:hasEnrolled :enrollment3;
   ex:hasPhone <tel:+22224444>;
   foaf:name "Charlie"@cs .
+
+:teacher1 a ex:Teacher;
+  ex:belongsTo :department1;
+  ex:hasEmail "smith@b.cz";
+  ex:hasPhone <tel:+77777777>;
+  ex:teaches :course2;
+  foaf:name "Dr. Smith"@cs .
 
 :teacher2 a ex:Teacher;
   ex:belongsTo :department2;
   ex:hasEmail "Miller@b.cz";
   ex:hasPhone <tel:+77888777>;
+  ex:teaches :course1;
   foaf:name "Dr. Miller"@cs .
+
+:teacher3 a ex:Teacher;
+  ex:belongsTo :department2;
+  ex:hasEmail "brown@a.cz";
+  ex:hasPhone <tel:+123456789>;
+  ex:teaches :course1,
+    :course3;
+  foaf:name "Dr. Brown"@cs .
 
 :department1 a ex:Department;
   ex:location "Building A"@en;
@@ -71,37 +87,22 @@
   ex:duration 3;
   ex:name "Mathematics"@en .
 
-:teacher1 a ex:Teacher;
-  ex:belongsTo :department1;
-  ex:hasEmail "smith@b.cz";
-  ex:hasPhone <tel:+77777777>;
-  foaf:name "Dr. Smith"@cs .
-
-:teacher3 a ex:Teacher;
-  ex:belongsTo :department2;
-  ex:hasEmail "brown@a.cz";
-  ex:hasPhone <tel:+123456789>;
-  foaf:name "Dr. Brown"@cs .
-
-:course1 a ex:Course;
-  ex:code "CS101"@en;
-  ex:credits 4;
-  ex:teachedBy :teacher2\,3;
-  ex:title "Introduction to Computer Science"@en .
+:department2 a ex:Department;
+  ex:location "Building B"@en;
+  ex:name "Mathematics Department"@en;
+  ex:offers :course2 .
 
 :course2 a ex:Course;
   ex:code "CS102"@en;
   ex:credits 3;
-  ex:teachedBy :teacher1;
   ex:title "Data Structures"@en .
 
 :course3 a ex:Course;
   ex:code "CS103"@en;
   ex:credits 4;
-  ex:teachedBy :teacher3;
   ex:title "Algorithms"@en .
 
-:department2 a ex:Department;
-  ex:location "Building B"@en;
-  ex:name "Mathematics Department"@en;
-  ex:offers :course2 .
+:course1 a ex:Course;
+  ex:code "CS101"@en;
+  ex:credits 4;
+  ex:title "Introduction to Computer Science"@en .

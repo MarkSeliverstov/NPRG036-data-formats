@@ -10,6 +10,52 @@
   "@id": "http://example.org/university/data.csv-metadata.json",
   "tables": [
     {
+      "@id": "http://example.org/university/data-9.csv-metadata.json",
+      "@type": "Table",
+      "url": "data-9.csv",
+      "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/teacher{teacher_id}",
+        "propertyUrl": "http://example.org/vocabulary/teaches",
+        "valueUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/course{course_id}",
+        "columns": [
+          {
+            "@type": "Column",
+            "name": "course_id",
+            "titles": "course_id",
+            "dc:description": "Unique identifier for a course.",
+            "required": true,
+            "datatype": "integer"
+          },
+          {
+            "@type": "Column",
+            "name": "teacher_id",
+            "titles": "teacher_id",
+            "required": true,
+            "dc:description": "Unique identifier for a teacher.",
+            "datatype": "int"
+          }
+        ],
+        "primaryKey": ["course_id", "teacher_id"],
+        "foreignKeys": [
+          {
+            "columnReference": "teacher_id",
+            "reference": {
+              "resource": "data-6.csv",
+              "columnReference": "id"
+            }
+          },
+          {
+            "columnReference": "course_id",
+            "reference": {
+              "resource": "data-5.csv",
+              "columnReference": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
       "@id": "http://example.org/university/data-8.csv-metadata.json",
       "@type": "Table",
       "url": "data-8.csv",
@@ -119,7 +165,8 @@
             "titles": "hasEmail",
             "dc:description": "Email of the student.",
             "datatype": "string",
-            "propertyUrl": "http://example.org/vocabulary/hasEmail"
+            "propertyUrl": "http://example.org/vocabulary/hasEmail",
+            "valueUrl": "mailto:{hasEmail}"
           },
           {
             "@type": "Column",
@@ -268,16 +315,6 @@
             "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/department{department_id}",
             "propertyUrl": "http://example.org/vocabulary/offers",
             "valueUrl": "course{id}"
-          },
-          {
-            "@type": "Column",
-            "name": "teacher_id",
-            "titles": "teacher_id",
-            "separator": ";",
-            "dc:description": "Teacher that teaches this course",
-            "datatype": "integer",
-            "propertyUrl": "http://example.org/vocabulary/teachedBy",
-            "valueUrl": "teacher{+teacher_id}"
           }
         ],
         "primaryKey": "id",
@@ -286,13 +323,6 @@
             "columnReference": "department_id",
             "reference": {
               "resource": "data-2.csv",
-              "columnReference": "id"
-            }
-          },
-          {
-            "columnReference": "teacher_id",
-            "reference": {
-              "resource": "data-6.csv",
               "columnReference": "id"
             }
           }
