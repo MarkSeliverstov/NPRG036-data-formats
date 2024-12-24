@@ -4,6 +4,11 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+:department3 a ex:Department;
+  ex:location "Building C"@en;
+  ex:name "Physics Department"@en;
+  ex:offers :course3 .
+
 :student1 a ex:Student;
   ex:enrolledIn :program1;
   ex:hasEmail "student1@b.cz";
@@ -31,30 +36,10 @@
   ex:hasPhone <tel:+77888777>;
   foaf:name "Dr. Miller"@cs .
 
-:course1 a ex:Course;
-  ex:code "CS101"@en;
-  ex:credits 4;
-  ex:offeredBy :department1;
-  ex:teachedBy :teacher2\,3;
-  ex:title "Introduction to Computer Science"@en .
-
-:course2 a ex:Course;
-  ex:code "CS102"@en;
-  ex:credits 3;
-  ex:offeredBy :department2;
-  ex:teachedBy :teacher1;
-  ex:title "Data Structures"@en .
-
-:course3 a ex:Course;
-  ex:code "CS103"@en;
-  ex:credits 4;
-  ex:offeredBy :department3;
-  ex:teachedBy :teacher3;
-  ex:title "Algorithms"@en .
-
-:department3 a ex:Department;
-  ex:location "Building C"@en;
-  ex:name "Physics Department"@en .
+:department1 a ex:Department;
+  ex:location "Building A"@en;
+  ex:name "Computer Science Department"@en;
+  ex:offers :course1 .
 
 :enrollment1 a ex:Enrollment;
   ex:completedOn "2021-01-01"^^xsd:date;
@@ -98,10 +83,25 @@
   ex:hasPhone <tel:+123456789>;
   foaf:name "Dr. Brown"@cs .
 
-:department1 a ex:Department;
-  ex:location "Building A"@en;
-  ex:name "Computer Science Department"@en .
+:course1 a ex:Course;
+  ex:code "CS101"@en;
+  ex:credits 4;
+  ex:teachedBy :teacher2\,3;
+  ex:title "Introduction to Computer Science"@en .
+
+:course2 a ex:Course;
+  ex:code "CS102"@en;
+  ex:credits 3;
+  ex:teachedBy :teacher1;
+  ex:title "Data Structures"@en .
+
+:course3 a ex:Course;
+  ex:code "CS103"@en;
+  ex:credits 4;
+  ex:teachedBy :teacher3;
+  ex:title "Algorithms"@en .
 
 :department2 a ex:Department;
   ex:location "Building B"@en;
-  ex:name "Mathematics Department"@en .
+  ex:name "Mathematics Department"@en;
+  ex:offers :course2 .

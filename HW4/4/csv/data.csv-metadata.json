@@ -265,8 +265,9 @@
             "titles": "department_id",
             "dc:description": "Department that offer the course",
             "datatype": "integer",
-            "propertyUrl": "http://example.org/vocabulary/offeredBy",
-            "valueUrl": "department{+department_id}"
+            "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/department{department_id}",
+            "propertyUrl": "http://example.org/vocabulary/offers",
+            "valueUrl": "course{id}"
           },
           {
             "@type": "Column",
