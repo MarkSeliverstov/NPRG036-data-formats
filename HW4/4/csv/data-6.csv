@@ -1,4 +1,4 @@
-id,name,hasEmail,department_id
-1,Dr. Smith,smith@b.cz,1
-2,Dr. Miller,Miller@b.cz,2
-3,Dr. Brown,brown@a.cz,2
+uri,id,name,hasEmail,department_uri
+http://example.org/vocabulary/teacher1,1,Dr. Smith,smith@b.cz,http://example.org/vocabulary/dept1
+http://example.org/vocabulary/teacher2,2,Dr. Miller,Miller@b.cz,http://example.org/vocabulary/dept2
+http://example.org/vocabulary/teacher3,3,Dr. Brown,brown@a.cz,http://example.org/vocabulary/dept2

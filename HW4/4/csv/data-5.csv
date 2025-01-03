@@ -1,4 +1,4 @@
-id,name,hasEmail,program_id,enrollment_id
-1,Alice,student1@b.cz,1,1
-2,Bob,bob@b.cz,2,2
-3,Charlie,Charlie@a.cz,3,3
+uri,id,name,hasEmail,program_uri,enrollment_uri
+http://example.org/vocabulary/student1,1,Alice,student1@b.cz,http://example.org/vocabulary/program1,http://example.org/vocabulary/enrollment1
+http://example.org/vocabulary/student2,2,Bob,bob@b.cz,http://example.org/vocabulary/program2,http://example.org/vocabulary/enrollment2
+http://example.org/vocabulary/student3,3,Charlie,Charlie@a.cz,http://example.org/vocabulary/program3,http://example.org/vocabulary/enrollment3

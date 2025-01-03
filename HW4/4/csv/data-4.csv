@@ -1,4 +1,4 @@
-id,name,duration
-1,Computer Science,4
-2,Data Science,2
-3,Mathematics,3
+uri,name,duration
+http://example.org/vocabulary/program1,Computer Science,4
+http://example.org/vocabulary/program2,Data Science,2
+http://example.org/vocabulary/program3,Mathematics,3

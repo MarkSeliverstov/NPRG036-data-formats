@@ -1,4 +1,4 @@
-id,name,location
-1,Computer Science Department,Building A
-2,Mathematics Department,Building B
-3,Physics Department,Building C
+uri,name,location
+http://example.org/vocabulary/dept1,Computer Science Department,Building A
+http://example.org/vocabulary/dept2,Mathematics Department,Building B
+http://example.org/vocabulary/dept3,Physics Department,Building C

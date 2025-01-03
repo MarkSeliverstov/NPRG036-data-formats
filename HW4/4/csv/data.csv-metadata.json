@@ -15,41 +15,41 @@
       "url": "data-9.csv",
       "tableSchema": {
         "@type": "Schema",
-        "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/teacher{teacher_id}",
+        "aboutUrl": "{+teacher_uri}",
         "propertyUrl": "http://example.org/vocabulary/teaches",
-        "valueUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/course{course_id}",
+        "valueUrl": "{+course_uri}",
         "columns": [
           {
             "@type": "Column",
-            "name": "course_id",
-            "titles": "course_id",
-            "dc:description": "Unique identifier for a course.",
+            "name": "course_uri",
+            "titles": "course_uri",
+            "dc:description": "Course URI",
             "required": true,
-            "datatype": "integer"
+            "datatype": "anyURI"
           },
           {
             "@type": "Column",
-            "name": "teacher_id",
-            "titles": "teacher_id",
+            "name": "teacher_uri",
+            "titles": "teacher_uri",
             "required": true,
-            "dc:description": "Unique identifier for a teacher.",
-            "datatype": "int"
+            "dc:description": "Teacher URI",
+            "datatype": "anyURI"
           }
         ],
-        "primaryKey": ["course_id", "teacher_id"],
+        "primaryKey": ["course_uri", "teacher_uri"],
         "foreignKeys": [
           {
-            "columnReference": "teacher_id",
+            "columnReference": "teacher_uri",
             "reference": {
               "resource": "data-6.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           },
           {
-            "columnReference": "course_id",
+            "columnReference": "course_uri",
             "reference": {
               "resource": "data-5.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           }
         ]
@@ -62,16 +62,16 @@
       "tableSchema": {
         "@type": "Schema",
         "propertyUrl": "http://example.org/vocabulary/hasPhone",
-        "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/student{student_id}",
+        "aboutUrl": "{+student_uri}",
         "valueUrl": "tel:{hasPhone}",
         "columns": [
           {
             "@type": "Column",
-            "name": "student_id",
-            "titles": "student_id",
-            "dc:description": "Unique identifier for a student.",
+            "name": "student_uri",
+            "titles": "student_uri",
+            "dc:description": "Student URI",
             "required": true,
-            "datatype": "integer"
+            "datatype": "anyURI"
           },
           {
             "@type": "Column",
@@ -85,10 +85,10 @@
         "primaryKey": ["hasPhone"],
         "foreignKeys": [
           {
-            "columnReference": "student_id",
+            "columnReference": "student_uri",
             "reference": {
               "resource": "data-5.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           }
         ]
@@ -101,16 +101,16 @@
       "tableSchema": {
         "@type": "Schema",
         "propertyUrl": "http://example.org/vocabulary/hasPhone",
-        "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/teacher{teacher_id}",
+        "aboutUrl": "{+teacher_uri}",
         "valueUrl": "tel:{hasPhone}",
         "columns": [
           {
             "@type": "Column",
-            "name": "teacher_id",
-            "titles": "teacher_id",
-            "dc:description": "Unique identifier for a teacher.",
+            "name": "teacher_uri",
+            "titles": "teacher_uri",
+            "dc:description": "Teacher uri",
             "required": true,
-            "datatype": "integer"
+            "datatype": "anyURI"
           },
           {
             "@type": "Column",
@@ -120,13 +120,13 @@
             "datatype": "string"
           }
         ],
-        "primaryKey": "teacher_id",
+        "primaryKey": "teacher_uri",
         "foreignKeys": [
           {
-            "columnReference": "teacher_id",
+            "columnReference": "teacher_uri",
             "reference": {
               "resource": "data-6.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           }
         ]
@@ -138,17 +138,26 @@
       "url": "data-5.csv",
       "tableSchema": {
         "@type": "Schema",
-        "aboutUrl": "student{+id}",
+        "aboutUrl": "{+uri}",
         "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "URI of a student.",
+            "required": true,
+            "datatype": "anyURI",
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Student"
+          },
           {
             "@type": "Column",
             "name": "id",
             "titles": "id",
             "dc:description": "Unique identifier for a student.",
+            "propertyUrl": "http://example.org/vocabulary/id",
             "required": true,
-            "datatype": "integer",
-            "propertyUrl": "rdf:type",
-            "valueUrl": "http://example.org/vocabulary/Student"
+            "datatype": "integer"
           },
           {
             "@type": "Column",
@@ -156,8 +165,9 @@
             "titles": "name",
             "dc:description": "Name of the student.",
             "datatype": "string",
+            "required": true,
             "propertyUrl": "foaf:name",
-            "lang": "cs"
+            "lang": "en"
           },
           {
             "@type": "Column",
@@ -170,38 +180,39 @@
           },
           {
             "@type": "Column",
-            "name": "program_id",
-            "titles": "program_id",
-            "dc:description": "Student program",
-            "datatype": "integer",
+            "name": "program_uri",
+            "titles": "program_uri",
+            "dc:description": "URI of program",
+            "datatype": "anyURI",
+            "required": true,
             "propertyUrl": "http://example.org/vocabulary/enrolledIn",
-            "valueUrl": "program{+program_id}"
+            "valueUrl": "{+program_uri}"
           },
           {
             "@type": "Column",
-            "name": "enrollment_id",
-            "titles": "enrollment_id",
-            "dc:description": "Student Enrollments",
-            "datatype": "integer",
-            "separator": ";",
+            "name": "enrollment_uri",
+            "titles": "enrollment_uri",
+            "dc:description": "URI of enrollment",
+            "required": true,
+            "datatype": "anyURI",
             "propertyUrl": "http://example.org/vocabulary/hasEnrolled",
-            "valueUrl": "enrollment{+enrollment_id}"
+            "valueUrl": "{+enrollment_uri}"
           }
         ],
         "primaryKey": "id",
         "foreignKeys": [
           {
-            "columnReference": "program_id",
+            "columnReference": "program_uri",
             "reference": {
               "resource": "data-4.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           },
           {
-            "columnReference": "enrollment_id",
+            "columnReference": "enrollment_uri",
             "reference": {
               "resource": "data-3.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           }
         ]
@@ -213,16 +224,26 @@
       "url": "data-6.csv",
       "tableSchema": {
         "@type": "Schema",
-        "aboutUrl": "teacher{+id}",
+        "aboutUrl": "{+uri}",
         "columns": [
+          {
+            "@type": "Column",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "URI of a Teacher.",
+            "required": true,
+            "datatype": "anyURI",
+            "propertyUrl": "rdf:type",
+            "valueUrl": "http://example.org/vocabulary/Teacher"
+          },
           {
             "@type": "Column",
             "name": "id",
             "titles": "id",
+            "datatype": "integer",
             "dc:description": "Unique identifier for a teacher.",
-            "required": true,
-            "propertyUrl": "rdf:type",
-            "valueUrl": "http://example.org/vocabulary/Teacher"
+            "propertyUrl": "http://example.org/vocabulary/id",
+            "required": true
           },
           {
             "@type": "Column",
@@ -230,34 +251,38 @@
             "titles": "name",
             "dc:description": "Name of the teacher.",
             "datatype": "string",
+            "required": true,
             "propertyUrl": "foaf:name",
-            "lang": "cs"
+            "lang": "en"
           },
           {
             "@type": "Column",
             "name": "hasEmail",
             "titles": "hasEmail",
+            "required": true,
             "dc:description": "Email of the teacher.",
             "datatype": "string",
-            "propertyUrl": "http://example.org/vocabulary/hasEmail"
+            "propertyUrl": "http://example.org/vocabulary/hasEmail",
+            "valueUrl": "mailto:{hasEmail}"
           },
           {
             "@type": "Column",
-            "name": "department_id",
-            "titles": "department_id",
+            "name": "department_uri",
+            "titles": "department_uri",
             "dc:description": "Teaches belongs to department",
-            "datatype": "integer",
+            "datatype": "anyURI",
             "propertyUrl": "http://example.org/vocabulary/belongsTo",
-            "valueUrl": "department{+department_id}"
+            "required": true,
+            "valueUrl": "{+department_uri}"
           }
         ],
         "primaryKey": "id",
         "foreignKeys": [
           {
-            "columnReference": "department_id",
+            "columnReference": "department_uri",
             "reference": {
               "resource": "data-2.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           }
         ]
@@ -269,14 +294,15 @@
       "url": "data-1.csv",
       "tableSchema": {
         "@type": "Schema",
-        "aboutUrl": "course{+id}",
+        "aboutUrl": "{+uri}",
         "columns": [
           {
             "@type": "Column",
-            "name": "id",
-            "titles": "id",
-            "datatype": "integer",
-            "dc:description": "Unique identifier for a course.",
+            "name": "uri",
+            "titles": "uri",
+            "required": true,
+            "datatype": "anyURI",
+            "dc:description": "Course URI",
             "propertyUrl": "rdf:type",
             "valueUrl": "http://example.org/vocabulary/Course"
           },
@@ -286,12 +312,14 @@
             "titles": "code",
             "dc:description": "Course code.",
             "datatype": "string",
+            "required": true,
             "lang": "en",
             "propertyUrl": "http://example.org/vocabulary/code"
           },
           {
             "@type": "Column",
             "name": "title",
+            "required": true,
             "titles": "title",
             "dc:description": "Title of the course.",
             "datatype": "string",
@@ -303,27 +331,29 @@
             "name": "credits",
             "titles": "credits",
             "dc:description": "Credits for the course.",
+            "required": true,
             "propertyUrl": "http://example.org/vocabulary/credits",
             "datatype": "integer"
           },
           {
             "@type": "Column",
-            "name": "department_id",
-            "titles": "department_id",
+            "name": "department_uri",
+            "titles": "department_uri",
+            "required": true,
             "dc:description": "Department that offer the course",
-            "datatype": "integer",
-            "aboutUrl": "file:/home/mff/NPRG036-data-formats/HW4/4/csv/department{department_id}",
+            "datatype": "anyURI",
+            "aboutUrl": "{+department_uri}",
             "propertyUrl": "http://example.org/vocabulary/offers",
-            "valueUrl": "course{id}"
+            "valueUrl": "{+uri}"
           }
         ],
-        "primaryKey": "id",
+        "primaryKey": "uri",
         "foreignKeys": [
           {
-            "columnReference": "department_id",
+            "columnReference": "department_uri",
             "reference": {
               "resource": "data-2.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           }
         ]
@@ -334,15 +364,16 @@
       "@type": "Table",
       "url": "data-2.csv",
       "tableSchema": {
-        "aboutUrl": "department{+id}",
+        "aboutUrl": "{+uri}",
         "@type": "Schema",
         "columns": [
           {
             "@type": "Column",
-            "name": "id",
-            "titles": "id",
-            "dc:description": "Unique identifier for a department.",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "URI of a Department",
             "propertyUrl": "rdf:type",
+            "required": true,
             "valueUrl": "http://example.org/vocabulary/Department"
           },
           {
@@ -360,12 +391,13 @@
             "name": "location",
             "titles": "location",
             "dc:description": "Location of the department.",
+            "required": true,
             "datatype": "string",
             "lang": "en",
             "propertyUrl": "http://example.org/vocabulary/location"
           }
         ],
-        "primaryKey": "id"
+        "primaryKey": "uri"
       }
     },
     {
@@ -374,15 +406,15 @@
       "url": "data-4.csv",
       "tableSchema": {
         "@type": "Schema",
-        "aboutUrl": "program{+id}",
+        "aboutUrl": "{+uri}",
         "columns": [
           {
             "@type": "Column",
-            "name": "id",
-            "titles": "id",
-            "dc:description": "Program id",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "URI of a program",
             "required": true,
-            "datatype": "integer",
+            "datatype": "anyURI",
             "propertyUrl": "rdf:type",
             "valueUrl": "http://example.org/vocabulary/Program"
           },
@@ -400,12 +432,13 @@
             "@type": "Column",
             "name": "duration",
             "titles": "duration",
+            "required": true,
             "dc:description": "Duration of the program in years.",
             "datatype": "integer",
             "propertyUrl": "http://example.org/vocabulary/duration"
           }
         ],
-        "primaryKey": "id"
+        "primaryKey": "uri"
       }
     },
     {
@@ -414,26 +447,27 @@
       "url": "data-3.csv",
       "tableSchema": {
         "@type": "Schema",
-        "aboutUrl": "enrollment{id}",
+        "aboutUrl": "{+uri}",
         "columns": [
           {
             "@type": "Column",
-            "name": "id",
-            "titles": "id",
-            "dc:description": "Unique identifier for an enrollment.",
+            "name": "uri",
+            "titles": "uri",
+            "dc:description": "URI of enrollment",
             "required": true,
+            "datatype": "anyURI",
             "propertyUrl": "rdf:type",
             "valueUrl": "http://example.org/vocabulary/Enrollment"
           },
           {
             "@type": "Column",
-            "name": "course_id",
-            "titles": "course_id",
-            "dc:description": "Course enrollments",
-            "datatype": "integer",
+            "name": "course_uri",
+            "titles": "course_uri",
+            "dc:description": "Course URI",
+            "datatype": "anyURI",
             "required": true,
             "propertyUrl": "http://example.org/vocabulary/course",
-            "valueUrl": "course{+course_id}"
+            "valueUrl": "{+course_uri}"
           },
           {
             "@type": "Column",
@@ -441,10 +475,12 @@
             "titles": "grade",
             "dc:description": "Grade earned in the course.",
             "datatype": "integer",
+            "required": true,
             "propertyUrl": "http://example.org/vocabulary/grade"
           },
           {
             "@type": "Column",
+            "required": true,
             "name": "enrolledOn",
             "titles": "enrolledOn",
             "dc:description": "Date of enrollment.",
@@ -456,17 +492,18 @@
             "name": "completedOn",
             "titles": "completedOn",
             "dc:description": "Completion date",
+            "required": true,
             "datatype": "date",
             "propertyUrl": "http://example.org/vocabulary/completedOn"
           }
         ],
-        "primaryKey": "id",
+        "primaryKey": "uri",
         "foreignKeys": [
           {
-            "columnReference": "course_id",
+            "columnReference": "course_uri",
             "reference": {
               "resource": "data-1.csv",
-              "columnReference": "id"
+              "columnReference": "uri"
             }
           }
         ]

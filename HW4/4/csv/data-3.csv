@@ -1,4 +1,4 @@
-id,course_id,grade,enrolledOn,completedOn
-1,1,2,2020-09-01,2021-01-01
-2,2,1,2020-09-01,2021-01-01
-3,3,3,2020-09-01,2021-01-01
+uri,course_uri,grade,enrolledOn,completedOn
+http://example.org/vocabulary/enrollment1,http://example.org/vocabulary/course1,2,2020-09-01,2021-01-01
+http://example.org/vocabulary/enrollment2,http://example.org/vocabulary/course2,1,2020-09-01,2021-01-01
+http://example.org/vocabulary/enrollment3,http://example.org/vocabulary/course3,3,2020-09-01,2021-01-01

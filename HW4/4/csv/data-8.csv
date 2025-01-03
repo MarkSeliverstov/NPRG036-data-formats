@@ -1,4 +1,4 @@
-student_id,hasPhone
-1,+123456789
-1,+987654321
-3,+22224444
+student_uri,hasPhone
+http://example.org/vocabulary/student1,+123456789
+http://example.org/vocabulary/student1,+987654321
+http://example.org/vocabulary/student3,+22224444

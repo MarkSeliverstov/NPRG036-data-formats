@@ -1,4 +1,4 @@
-teacher_id,hasPhone
-1,+77777777
-2,+77888777
-3,+123456789
+teacher_uri,hasPhone
+http://example.org/vocabulary/teacher1,+77777777
+http://example.org/vocabulary/teacher2,+77888777
+http://example.org/vocabulary/teacher3,+123456789

@@ -1,4 +1,4 @@
-id,code,title,credits, department_id
-1,CS101,Introduction to Computer Science,4,1
-2,CS102,Data Structures,3,2
-3,CS103,Algorithms,4,3
+uri,code,title,credits,department_uri
+http://example.org/vocabulary/course1,CS101,Introduction to Computer Science,4,http://example.org/vocabulary/dept1
+http://example.org/vocabulary/course2,CS102,Data Structures,3,http://example.org/vocabulary/dept3
+http://example.org/vocabulary/course3,CS103,Algorithms,4,http://example.org/vocabulary/dept2

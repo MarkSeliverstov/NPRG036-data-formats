@@ -1,108 +1,113 @@
-@prefix : <file:/home/mff/NPRG036-data-formats/HW4/4/csv/> .
 @prefix ex: <http://example.org/vocabulary/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:department3 a ex:Department;
+ex:dept3 a ex:Department;
   ex:location "Building C"@en;
   ex:name "Physics Department"@en;
-  ex:offers :course3 .
+  ex:offers ex:course2 .
 
-:student1 a ex:Student;
-  ex:enrolledIn :program1;
+ex:student1 a ex:Student;
+  ex:enrolledIn ex:program1;
   ex:hasEmail <mailto:student1@b.cz>;
-  ex:hasEnrolled :enrollment1;
+  ex:hasEnrolled ex:enrollment1;
   ex:hasPhone <tel:+123456789>,
     <tel:+987654321>;
-  foaf:name "Alice"@cs .
+  ex:id 1;
+  foaf:name "Alice"@en .
 
-:student2 a ex:Student;
-  ex:enrolledIn :program2;
+ex:student2 a ex:Student;
+  ex:enrolledIn ex:program2;
   ex:hasEmail <mailto:bob@b.cz>;
-  ex:hasEnrolled :enrollment2;
-  foaf:name "Bob"@cs .
+  ex:hasEnrolled ex:enrollment2;
+  ex:id 2;
+  foaf:name "Bob"@en .
 
-:student3 a ex:Student;
-  ex:enrolledIn :program3;
+ex:student3 a ex:Student;
+  ex:enrolledIn ex:program3;
   ex:hasEmail <mailto:Charlie@a.cz>;
-  ex:hasEnrolled :enrollment3;
+  ex:hasEnrolled ex:enrollment3;
   ex:hasPhone <tel:+22224444>;
-  foaf:name "Charlie"@cs .
+  ex:id 3;
+  foaf:name "Charlie"@en .
 
-:teacher1 a ex:Teacher;
-  ex:belongsTo :department1;
-  ex:hasEmail "smith@b.cz";
+ex:teacher1 a ex:Teacher;
+  ex:belongsTo ex:dept1;
+  ex:hasEmail <mailto:smith@b.cz>;
   ex:hasPhone <tel:+77777777>;
-  ex:teaches :course2;
-  foaf:name "Dr. Smith"@cs .
+  ex:id 1;
+  ex:teaches ex:course1,
+    ex:course2;
+  foaf:name "Dr. Smith"@en .
 
-:teacher2 a ex:Teacher;
-  ex:belongsTo :department2;
-  ex:hasEmail "Miller@b.cz";
+ex:teacher2 a ex:Teacher;
+  ex:belongsTo ex:dept2;
+  ex:hasEmail <mailto:Miller@b.cz>;
   ex:hasPhone <tel:+77888777>;
-  ex:teaches :course1;
-  foaf:name "Dr. Miller"@cs .
+  ex:id 2;
+  ex:teaches ex:course3;
+  foaf:name "Dr. Miller"@en .
 
-:teacher3 a ex:Teacher;
-  ex:belongsTo :department2;
-  ex:hasEmail "brown@a.cz";
+ex:teacher3 a ex:Teacher;
+  ex:belongsTo ex:dept2;
+  ex:hasEmail <mailto:brown@a.cz>;
   ex:hasPhone <tel:+123456789>;
-  ex:teaches :course1,
-    :course3;
-  foaf:name "Dr. Brown"@cs .
+  ex:id 3;
+  ex:teaches ex:course3;
+  foaf:name "Dr. Brown"@en .
 
-:department1 a ex:Department;
+ex:dept1 a ex:Department;
   ex:location "Building A"@en;
   ex:name "Computer Science Department"@en;
-  ex:offers :course1 .
+  ex:offers ex:course1 .
 
-:enrollment1 a ex:Enrollment;
+ex:enrollment1 a ex:Enrollment;
   ex:completedOn "2021-01-01"^^xsd:date;
-  ex:course :course1;
+  ex:course ex:course1;
   ex:enrolledOn "2020-09-01"^^xsd:date;
   ex:grade 2 .
 
-:enrollment2 a ex:Enrollment;
+ex:enrollment2 a ex:Enrollment;
   ex:completedOn "2021-01-01"^^xsd:date;
-  ex:course :course2;
+  ex:course ex:course2;
   ex:enrolledOn "2020-09-01"^^xsd:date;
   ex:grade 1 .
 
-:enrollment3 a ex:Enrollment;
+ex:enrollment3 a ex:Enrollment;
   ex:completedOn "2021-01-01"^^xsd:date;
-  ex:course :course3;
+  ex:course ex:course3;
   ex:enrolledOn "2020-09-01"^^xsd:date;
   ex:grade 3 .
 
-:program1 a ex:Program;
+ex:program1 a ex:Program;
   ex:duration 4;
   ex:name "Computer Science"@en .
 
-:program2 a ex:Program;
+ex:program2 a ex:Program;
   ex:duration 2;
   ex:name "Data Science"@en .
 
-:program3 a ex:Program;
+ex:program3 a ex:Program;
   ex:duration 3;
   ex:name "Mathematics"@en .
 
-:department2 a ex:Department;
+ex:dept2 a ex:Department;
   ex:location "Building B"@en;
   ex:name "Mathematics Department"@en;
-  ex:offers :course2 .
+  ex:offers ex:course3 .
 
-:course2 a ex:Course;
+ex:course1 a ex:Course;
+  ex:code "CS101"@en;
+  ex:credits 4;
+  ex:title "Introduction to Computer Science"@en .
+
+ex:course2 a ex:Course;
   ex:code "CS102"@en;
   ex:credits 3;
   ex:title "Data Structures"@en .
 
-:course3 a ex:Course;
+ex:course3 a ex:Course;
   ex:code "CS103"@en;
   ex:credits 4;
   ex:title "Algorithms"@en .
-
-:course1 a ex:Course;
-  ex:code "CS101"@en;
-  ex:credits 4;
-  ex:title "Introduction to Computer Science"@en .
